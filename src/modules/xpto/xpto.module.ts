@@ -6,6 +6,7 @@ import { FilterCustomerPurchasesByDayUseCase } from './application/useCase/Filte
 import { FilterCustomerPurchasesByMonthUseCase } from './application/useCase/FilterCustomerPurchasesByMonthUseCase';
 import { FilterCustomerPurchasesByYearUseCase } from './application/useCase/FilterCustomerPurchasesByYearUseCase';
 import { FilterPurchasesByIdUseCase } from './application/useCase/FilterPurchasesByIdUseCase';
+import { ListCustomersWhoSpentMostByDayUseCase } from './application/useCase/ListCustomersWhoSpentMostByDayUseCase';
 import { ListMostSoldPurchasesByDayUseCase } from './application/useCase/ListMostSoldPurchasesByDayUseCase';
 import { ListMostSoldPurchasesByMonthUseCase } from './application/useCase/ListMostSoldPurchasesByMonthUseCase';
 import { ListMostSoldPurchasesByYearUseCase } from './application/useCase/ListMostSoldPurchasesByYearUseCase';
@@ -35,6 +36,7 @@ import { ProductsCustomerRepository } from './infra/repository/ProductsCustomerR
     ListMostSoldPurchasesByDayUseCase,
     ListMostSoldPurchasesByMonthUseCase,
     ListMostSoldPurchasesByYearUseCase,
+    ListCustomersWhoSpentMostByDayUseCase,
   ],
 })
 export class XptoModule {}

@@ -27,6 +27,7 @@ import { FilterCustomerPurchasesByYearUseCase } from '../../application/useCase/
 import { ListMostSoldPurchasesByDayUseCase } from '../../application/useCase/ListMostSoldPurchasesByDayUseCase';
 import { ListMostSoldPurchasesByMonthUseCase } from '../../application/useCase/ListMostSoldPurchasesByMonthUseCase';
 import { ListMostSoldPurchasesByYearUseCase } from '../../application/useCase/ListMostSoldPurchasesByYearUseCase';
+import { ListCustomersWhoSpentMostByDayUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByDayUseCase';
 
 @ApiTags('Compras')
 @Controller('purchase')
@@ -50,6 +51,8 @@ export class PurchaseController extends BaseController {
     private listMostSoldPurchasesByMonthUseCase: ListMostSoldPurchasesByMonthUseCase,
     @Inject(ListMostSoldPurchasesByYearUseCase)
     private listMostSoldPurchasesByYearUseCase: ListMostSoldPurchasesByYearUseCase,
+    @Inject(ListCustomersWhoSpentMostByDayUseCase)
+    private listCustomersWhoSpentMostByDayUseCase: ListCustomersWhoSpentMostByDayUseCase,
   ) {
     super();
   }
@@ -221,4 +224,30 @@ export class PurchaseController extends BaseController {
       this.handleAppError(res, error);
     }
   }
+
+  // @ApiOperation({
+  //   summary: 'Lista dos clientes que mais gastam no dia',
+  // })
+  // @ApiQuery({ name: 'day', example: '27' })
+  // @ApiQuery({ name: 'month', example: '04' })
+  // @ApiQuery({ name: 'year', example: '2022' })
+  // @ApiResponse({ status: 200 })
+  // @Get('customers/sold/day')
+  // async listCustomerWhoSpentMostByDay(
+  //   @Res() res: Response,
+  //   @Query('day') day: string,
+  //   @Query('month') month: string,
+  //   @Query('year') year: string,
+  // ) {
+  //   try {
+  //     const result = await this.listCustomersWhoSpentMostByDayUseCase.execute(
+  //       day,
+  //       month,
+  //       year,
+  //     );
+  //     this.ok(res, result);
+  //   } catch (error) {
+  //     this.handleAppError(res, error);
+  //   }
+  // }
 }
