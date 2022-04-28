@@ -98,17 +98,23 @@ export class PurchaseController extends BaseController {
   })
   @ApiQuery({ name: 'id', example: '89e22db8-f5da-4694-a5cd-e7c5cc668d70' })
   @ApiQuery({ name: 'day', example: '27' })
+  @ApiQuery({ name: 'month', example: '04' })
+  @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
   @Get('day')
   async filterCustomerPurchasesByDay(
     @Res() res: Response,
     @Query('id') id: string,
     @Query('day') day: string,
+    @Query('month') month: string,
+    @Query('year') year: string,
   ) {
     try {
       const result = await this.filterCustomerPurchasesByDayUseCase.execute(
         id,
         day,
+        month,
+        year,
       );
       this.ok(res, result);
     } catch (error) {
@@ -121,17 +127,20 @@ export class PurchaseController extends BaseController {
   })
   @ApiQuery({ name: 'id', example: '89e22db8-f5da-4694-a5cd-e7c5cc668d70' })
   @ApiQuery({ name: 'month', example: '04' })
+  @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
   @Get('month')
   async filterCustomerPurchasesByMonth(
     @Res() res: Response,
     @Query('id') id: string,
     @Query('month') month: string,
+    @Query('year') year: string,
   ) {
     try {
       const result = await this.filterCustomerPurchasesByMonthUseCase.execute(
         id,
         month,
+        year,
       );
       this.ok(res, result);
     } catch (error) {

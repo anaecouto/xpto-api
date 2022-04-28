@@ -9,19 +9,35 @@ export class FilterCustomerPurchasesByDayUseCase {
     private productsCustomerRepository: IProductsCustomerRepo,
   ) {}
 
-  async execute(id: string, day: string): Promise<ProductsCustomerDomain[]> {
+  async execute(
+    id: string,
+    day: string,
+    month: string,
+    year: string,
+  ): Promise<ProductsCustomerDomain[]> {
     const productsCustomers =
       await this.productsCustomerRepository.filterPurchasesById(id);
 
-    return this.filterPurchasesByCustomerAndDay(day, productsCustomers);
+    return this.filterPurchasesByCustomerAndDay(
+      day,
+      month,
+      year,
+      productsCustomers,
+    );
   }
 
   private filterPurchasesByCustomerAndDay(
     day: string,
+    month: string,
+    year: string,
     purchasesDomain: ProductsCustomerDomain[],
   ) {
     return purchasesDomain.filter((customerPurchasesByDay) => {
-      return customerPurchasesByDay.created_at.getDate() === parseInt(day);
+      return (
+        customerPurchasesByDay.created_at.getDate() === parseInt(day) &&
+        customerPurchasesByDay.created_at.getMonth() + 1 === parseInt(month) &&
+        customerPurchasesByDay.created_at.getFullYear() === parseInt(year)
+      );
     });
   }
 }
