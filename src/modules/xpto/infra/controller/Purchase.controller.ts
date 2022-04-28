@@ -28,6 +28,8 @@ import { ListMostSoldPurchasesByDayUseCase } from '../../application/useCase/Lis
 import { ListMostSoldPurchasesByMonthUseCase } from '../../application/useCase/ListMostSoldPurchasesByMonthUseCase';
 import { ListMostSoldPurchasesByYearUseCase } from '../../application/useCase/ListMostSoldPurchasesByYearUseCase';
 import { ListCustomersWhoSpentMostByDayUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByDayUseCase';
+import { ListCustomersWhoSpentMostByMonthUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByMonthUseCase';
+import { ListCustomersWhoSpentMostByYearUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByYearUseCase';
 
 @ApiTags('Compras')
 @Controller('purchase')
@@ -53,6 +55,10 @@ export class PurchaseController extends BaseController {
     private listMostSoldPurchasesByYearUseCase: ListMostSoldPurchasesByYearUseCase,
     @Inject(ListCustomersWhoSpentMostByDayUseCase)
     private listCustomersWhoSpentMostByDayUseCase: ListCustomersWhoSpentMostByDayUseCase,
+    @Inject(ListCustomersWhoSpentMostByMonthUseCase)
+    private listCustomersWhoSpentMostByMonthUseCase: ListCustomersWhoSpentMostByMonthUseCase,
+    @Inject(ListCustomersWhoSpentMostByYearUseCase)
+    private listCustomersWhoSpentMostByYearUseCase: ListCustomersWhoSpentMostByYearUseCase,
   ) {
     super();
   }
@@ -243,6 +249,49 @@ export class PurchaseController extends BaseController {
       const result = await this.listCustomersWhoSpentMostByDayUseCase.execute(
         day,
         month,
+        year,
+      );
+      this.ok(res, result);
+    } catch (error) {
+      this.handleAppError(res, error);
+    }
+  }
+
+  @ApiOperation({
+    summary: 'Lista dos clientes que mais gastam no mês',
+  })
+  @ApiQuery({ name: 'month', example: '04' })
+  @ApiQuery({ name: 'year', example: '2022' })
+  @ApiResponse({ status: 200 })
+  @Get('customers/sold/month')
+  async listCustomerWhoSpentMostByMonth(
+    @Res() res: Response,
+    @Query('month') month: string,
+    @Query('year') year: string,
+  ) {
+    try {
+      const result = await this.listCustomersWhoSpentMostByMonthUseCase.execute(
+        month,
+        year,
+      );
+      this.ok(res, result);
+    } catch (error) {
+      this.handleAppError(res, error);
+    }
+  }
+
+  @ApiOperation({
+    summary: 'Lista dos clientes que mais gastam no ano',
+  })
+  @ApiQuery({ name: 'year', example: '2022' })
+  @ApiResponse({ status: 200 })
+  @Get('customers/sold/year')
+  async listCustomerWhoSpentMostByYear(
+    @Res() res: Response,
+    @Query('year') year: string,
+  ) {
+    try {
+      const result = await this.listCustomersWhoSpentMostByYearUseCase.execute(
         year,
       );
       this.ok(res, result);
