@@ -157,14 +157,22 @@ export class PurchaseController extends BaseController {
     summary: 'Lista produtos mais vendidos do dia',
   })
   @ApiQuery({ name: 'day', example: '27' })
+  @ApiQuery({ name: 'month', example: '04' })
+  @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
   @Get('sold/day')
   async listMostSoldProductsByDay(
     @Res() res: Response,
     @Query('day') day: string,
+    @Query('month') month: string,
+    @Query('year') year: string,
   ) {
     try {
-      const result = await this.listMostSoldPurchasesByDayUseCase.execute(day);
+      const result = await this.listMostSoldPurchasesByDayUseCase.execute(
+        day,
+        month,
+        year,
+      );
       this.ok(res, result);
     } catch (error) {
       this.handleAppError(res, error);
@@ -174,16 +182,19 @@ export class PurchaseController extends BaseController {
   @ApiOperation({
     summary: 'Lista produtos mais vendidos do mês',
   })
-  @ApiQuery({ name: 'mês', example: '04' })
+  @ApiQuery({ name: 'month', example: '04' })
+  @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
   @Get('sold/month')
   async listMostSoldProductsByMonth(
     @Res() res: Response,
     @Query('month') month: string,
+    @Query('year') year: string,
   ) {
     try {
       const result = await this.listMostSoldPurchasesByMonthUseCase.execute(
         month,
+        year,
       );
       this.ok(res, result);
     } catch (error) {

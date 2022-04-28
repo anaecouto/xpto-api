@@ -8,9 +8,13 @@ export class ListMostSoldPurchasesByDayUseCase {
     private productsCustomerRepository: IProductsCustomerRepo,
   ) {}
 
-  async execute(day: string) {
+  async execute(day: string, month: string, year: string) {
     const allProductsList =
-      await this.productsCustomerRepository.listAllPurchasesByDay(day);
+      await this.productsCustomerRepository.listAllPurchasesByDay(
+        day,
+        month,
+        year,
+      );
 
     const allProductsListDTO = allProductsList.map((purchase) => {
       return {

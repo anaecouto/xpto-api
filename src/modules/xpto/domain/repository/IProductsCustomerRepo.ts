@@ -7,7 +7,14 @@ export interface IProductsCustomerRepo {
     productsCustomer: ProductsCustomerDomain,
   ): Promise<ProductsCustomerDomain>;
   filterPurchasesById(id: string): Promise<ProductsCustomerDomain[]>;
-  listAllPurchasesByDay(day: string): Promise<ProductsCustomerDomain[]>;
-  listAllPurchasesByMonth(month: string): Promise<ProductsCustomerDomain[]>;
+  listAllPurchasesByDay(
+    day: string,
+    month: string,
+    year: string,
+  ): Promise<ProductsCustomerDomain[]>;
+  listAllPurchasesByMonth(
+    month: string,
+    year: string,
+  ): Promise<ProductsCustomerDomain[]>;
   listAllPurchasesByYear(year: string): Promise<ProductsCustomerDomain[]>;
 }

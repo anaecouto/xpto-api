@@ -38,21 +38,10 @@ export class ProductsCustomerRepository
     return purchasesDomain;
   }
 
-  async listAllPurchasesByDay(day: string): Promise<ProductsCustomerDomain[]> {
-    const purchasesList =
-      await this.prismaRepository.productsCustomer.findMany();
-
-    const purchasesDomain = purchasesList.map((purchase) => {
-      return ProductsCustomerMapper.toDomain(purchase);
-    });
-
-    return purchasesDomain.filter((purchases) => {
-      return purchases.created_at.getDate() === parseInt(day);
-    });
-  }
-
-  async listAllPurchasesByMonth(
+  async listAllPurchasesByDay(
+    day: string,
     month: string,
+    year: string,
   ): Promise<ProductsCustomerDomain[]> {
     const purchasesList =
       await this.prismaRepository.productsCustomer.findMany();
@@ -62,7 +51,30 @@ export class ProductsCustomerRepository
     });
 
     return purchasesDomain.filter((purchases) => {
-      return purchases.created_at.getMonth() + 1 === parseInt(month);
+      return (
+        purchases.created_at.getDate() === parseInt(day) &&
+        purchases.created_at.getMonth() + 1 === parseInt(month) &&
+        purchases.created_at.getFullYear() === parseInt(year)
+      );
+    });
+  }
+
+  async listAllPurchasesByMonth(
+    month: string,
+    year: string,
+  ): Promise<ProductsCustomerDomain[]> {
+    const purchasesList =
+      await this.prismaRepository.productsCustomer.findMany();
+
+    const purchasesDomain = purchasesList.map((purchase) => {
+      return ProductsCustomerMapper.toDomain(purchase);
+    });
+
+    return purchasesDomain.filter((purchases) => {
+      return (
+        purchases.created_at.getMonth() + 1 === parseInt(month) &&
+        purchases.created_at.getFullYear() === parseInt(year)
+      );
     });
   }
 
