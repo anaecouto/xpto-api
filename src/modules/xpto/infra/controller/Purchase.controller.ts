@@ -225,29 +225,29 @@ export class PurchaseController extends BaseController {
     }
   }
 
-  // @ApiOperation({
-  //   summary: 'Lista dos clientes que mais gastam no dia',
-  // })
-  // @ApiQuery({ name: 'day', example: '27' })
-  // @ApiQuery({ name: 'month', example: '04' })
-  // @ApiQuery({ name: 'year', example: '2022' })
-  // @ApiResponse({ status: 200 })
-  // @Get('customers/sold/day')
-  // async listCustomerWhoSpentMostByDay(
-  //   @Res() res: Response,
-  //   @Query('day') day: string,
-  //   @Query('month') month: string,
-  //   @Query('year') year: string,
-  // ) {
-  //   try {
-  //     const result = await this.listCustomersWhoSpentMostByDayUseCase.execute(
-  //       day,
-  //       month,
-  //       year,
-  //     );
-  //     this.ok(res, result);
-  //   } catch (error) {
-  //     this.handleAppError(res, error);
-  //   }
-  // }
+  @ApiOperation({
+    summary: 'Lista dos clientes que mais gastam no dia',
+  })
+  @ApiQuery({ name: 'day', example: '27' })
+  @ApiQuery({ name: 'month', example: '04' })
+  @ApiQuery({ name: 'year', example: '2022' })
+  @ApiResponse({ status: 200 })
+  @Get('customers/sold/day')
+  async listCustomerWhoSpentMostByDay(
+    @Res() res: Response,
+    @Query('day') day: string,
+    @Query('month') month: string,
+    @Query('year') year: string,
+  ) {
+    try {
+      const result = await this.listCustomersWhoSpentMostByDayUseCase.execute(
+        day,
+        month,
+        year,
+      );
+      this.ok(res, result);
+    } catch (error) {
+      this.handleAppError(res, error);
+    }
+  }
 }

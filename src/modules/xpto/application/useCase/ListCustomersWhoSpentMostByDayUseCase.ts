@@ -1,4 +1,6 @@
 import { Inject } from '@nestjs/common';
+import { GroupArrayByUtils } from 'src/shared/utils/GroupArrayByUtils';
+import { GroupByUtils } from 'src/shared/utils/GroupByUtils';
 import { IProductsCustomerRepo } from '../../domain/repository/IProductsCustomerRepo';
 import { ProductsCustomerRepository } from '../../infra/repository/ProductsCustomerRepository';
 
@@ -25,7 +27,14 @@ export class ListCustomersWhoSpentMostByDayUseCase {
       return customerDTO;
     });
 
-    const clientsThatSpentMostList = allProductsListDTO.sort((a, b) => {
+    const productsGroupedByCustomerId =
+      GroupByUtils.groupBy(allProductsListDTO);
+
+    const valuesArray = GroupArrayByUtils.groupArrayBy(
+      productsGroupedByCustomerId,
+    );
+
+    const clientsThatSpentMostList = valuesArray.sort((a, b) => {
       return b.totalValue - a.totalValue;
     });
 
