@@ -1,7 +1,6 @@
 export class GroupArrayByUtils {
   static groupArrayBy(productsGroupedByCustomerId) {
     const array = [];
-    console.log(productsGroupedByCustomerId);
     for (const key in productsGroupedByCustomerId) {
       let object;
       let value = 0;
