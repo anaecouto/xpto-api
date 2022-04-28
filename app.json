@@ -1,0 +1,7 @@
+{
+  "name": "xpto-api",
+  "description": "CRUD API for XPTO company",
+  "image": "heroku/nodejs",
+  "owner": "Ana Elisa Rodrigues do Couto",
+  "addons": []
+}
