@@ -1,4 +1,6 @@
 import { Inject } from '@nestjs/common';
+import { GroupMostSoldArrayUtils } from 'src/shared/utils/GroupMostSoldArrayUtils';
+import { GroupMostSoldUtils } from 'src/shared/utils/GroupMostSoldUtils';
 import { IProductsCustomerRepo } from '../../domain/repository/IProductsCustomerRepo';
 import { ProductsCustomerRepository } from '../../infra/repository/ProductsCustomerRepository';
 
@@ -24,7 +26,14 @@ export class ListMostSoldPurchasesByDayUseCase {
       };
     });
 
-    const mostSoldProductsByDayList = allProductsListDTO.sort((a, b) => {
+    const mostSoldProductsByDay =
+      GroupMostSoldUtils.groupBy(allProductsListDTO);
+
+    const productsArray = GroupMostSoldArrayUtils.groupArrayBy(
+      mostSoldProductsByDay,
+    );
+
+    const mostSoldProductsByDayList = productsArray.sort((a, b) => {
       return b.quantity - a.quantity;
     });
 
