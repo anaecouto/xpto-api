@@ -14,8 +14,8 @@ export class AccessTokenController extends BaseController {
   }
 
   @Post('token')
-  @ApiOperation({ summary: 'Get access token.' })
-  @ApiResponse({ status: 200, description: 'Get access token.' })
+  @ApiOperation({ summary: 'Autentica no sistema' })
+  @ApiResponse({ status: 200, description: 'Autentica no sistema' })
   @Public()
   async newMessage(@Res() res: Response, @Body() dto: IGetTokenKeycloakDTO) {
     this.accessTokenProvider
