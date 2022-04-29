@@ -30,10 +30,11 @@ import { ListMostSoldPurchasesByYearUseCase } from '../../application/useCase/Li
 import { ListCustomersWhoSpentMostByDayUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByDayUseCase';
 import { ListCustomersWhoSpentMostByMonthUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByMonthUseCase';
 import { ListCustomersWhoSpentMostByYearUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByYearUseCase';
+import ProductsCustomerQuery from '../../application/query/ProductsCustomerQuery';
 
 @ApiTags('Compras')
 @Controller('purchase')
-export class PurchaseController extends BaseController {
+export class ProductsCustomerController extends BaseController {
   constructor(
     @Inject(ProductsCustomerRepository)
     private productRepository: IProductsCustomerRepo,
@@ -59,6 +60,8 @@ export class PurchaseController extends BaseController {
     private listCustomersWhoSpentMostByMonthUseCase: ListCustomersWhoSpentMostByMonthUseCase,
     @Inject(ListCustomersWhoSpentMostByYearUseCase)
     private listCustomersWhoSpentMostByYearUseCase: ListCustomersWhoSpentMostByYearUseCase,
+    @Inject(ProductsCustomerQuery)
+    private productsCustomerQuery: ProductsCustomerQuery,
   ) {
     super();
   }
@@ -73,6 +76,21 @@ export class PurchaseController extends BaseController {
     try {
       await this.purchaseProductsUseCase.execute(dto);
       this.ok(res, { message: 'Compra efetuada com sucesso!' });
+    } catch (error) {
+      this.handleAppError(res, error);
+    }
+  }
+
+  @ApiOperation({
+    summary: 'Lista uma compra por id',
+  })
+  @ApiResponse({ status: 200 })
+  @ApiQuery({ name: 'id', example: 'b1e10434-2230-4d7f-a0ff-1684908e105c' })
+  @Get('')
+  async findPurchaseById(@Res() res: Response, @Query('id') id: string) {
+    try {
+      const result = await this.productsCustomerQuery.findById(id);
+      this.ok(res, { purchase: result.props });
     } catch (error) {
       this.handleAppError(res, error);
     }

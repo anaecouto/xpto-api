@@ -17,4 +17,5 @@ export interface IProductsCustomerRepo {
     year: string,
   ): Promise<ProductsCustomerDomain[]>;
   listAllPurchasesByYear(year: string): Promise<ProductsCustomerDomain[]>;
+  findById(id: string): Promise<ProductsCustomerDomain>;
 }

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { PrismaRepository } from 'src/shared/infra/database/prisma/PrismaRepository';
 import CustomerQuery from './application/query/CustomerQuery';
 import ProductQuery from './application/query/ProductQuery';
+import ProductsCustomerQuery from './application/query/ProductsCustomerQuery';
 import { FilterCustomerPurchasesByDayUseCase } from './application/useCase/FilterCustomerPurchasesByDayUseCase';
 import { FilterCustomerPurchasesByMonthUseCase } from './application/useCase/FilterCustomerPurchasesByMonthUseCase';
 import { FilterCustomerPurchasesByYearUseCase } from './application/useCase/FilterCustomerPurchasesByYearUseCase';
@@ -15,22 +16,26 @@ import { ListMostSoldPurchasesByYearUseCase } from './application/useCase/ListMo
 import { PurchaseProductsUseCase } from './application/useCase/PurchaseProductsUseCase';
 import { CustomerController } from './infra/controller/Customer.controller';
 import { ProductController } from './infra/controller/Product.controller';
-import { PurchaseController } from './infra/controller/Purchase.controller';
+import { ProductsCustomerController } from './infra/controller/ProductsCustomers.controller';
 import { CustomerRepository } from './infra/repository/CustomerRepository';
 import { ProductRepository } from './infra/repository/ProductRepository';
 import { ProductsCustomerRepository } from './infra/repository/ProductsCustomerRepository';
 
 @Module({
   imports: [],
-  controllers: [CustomerController, ProductController, PurchaseController],
+  controllers: [
+    CustomerController,
+    ProductController,
+    ProductsCustomerController,
+  ],
   providers: [
+    ProductsCustomerRepository,
     PrismaRepository,
     CustomerRepository,
     CustomerQuery,
     ProductRepository,
     ProductQuery,
     PurchaseProductsUseCase,
-    ProductsCustomerRepository,
     FilterPurchasesByIdUseCase,
     FilterCustomerPurchasesByDayUseCase,
     FilterCustomerPurchasesByMonthUseCase,
@@ -41,6 +46,7 @@ import { ProductsCustomerRepository } from './infra/repository/ProductsCustomerR
     ListCustomersWhoSpentMostByDayUseCase,
     ListCustomersWhoSpentMostByMonthUseCase,
     ListCustomersWhoSpentMostByYearUseCase,
+    ProductsCustomerQuery,
   ],
 })
 export class XptoModule {}

@@ -54,7 +54,7 @@ export class ProductController extends BaseController {
     summary: 'Encontra um produto pelo id',
   })
   @ApiQuery({ name: 'id', example: 'd4c90ffa-d4c9-4c5a-8b3a-e4f6f355112b' })
-  @ApiResponse({ status: 201 })
+  @ApiResponse({ status: 200 })
   @Get('')
   async find(@Res() res: Response, @Query('id') id: string) {
     try {

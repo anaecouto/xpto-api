@@ -92,4 +92,12 @@ export class ProductsCustomerRepository
       return purchases.created_at.getFullYear() === parseInt(year);
     });
   }
+
+  async findById(id: string): Promise<ProductsCustomerDomain> {
+    const purchase = await this.prismaRepository.productsCustomer.findUnique({
+      where: { id },
+    });
+
+    return ProductsCustomerMapper.toDomain(purchase);
+  }
 }
