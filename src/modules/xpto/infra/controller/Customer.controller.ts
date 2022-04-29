@@ -22,6 +22,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ICustomerRepo } from '../../domain/repository/ICustomerRepo';
+import { Roles } from 'nest-keycloak-connect';
 
 @ApiTags('Clientes')
 @Controller('customer')
@@ -40,6 +41,7 @@ export class CustomerController extends BaseController {
   })
   @ApiBody({ type: CustomerDTO, required: true })
   @ApiResponse({ status: 201 })
+  @Roles({ roles: ['realm:admin'] })
   @Post('create')
   async create(@Res() res: Response, @Body() dto: CustomerDTO) {
     try {
@@ -55,6 +57,7 @@ export class CustomerController extends BaseController {
   })
   @ApiQuery({ name: 'cpf', example: '44931857914' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Get()
   async findCustomer(@Res() res: Response, @Query('cpf') cpf: string) {
     try {
@@ -71,6 +74,7 @@ export class CustomerController extends BaseController {
   @ApiQuery({ name: 'id', example: '89e22db8-f5da-4694-a5cd-e7c5cc668d70' })
   @ApiBody({ type: CustomerDTO, required: true })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Put()
   async updateCustomer(
     @Res() res: Response,
@@ -93,6 +97,7 @@ export class CustomerController extends BaseController {
   })
   @ApiQuery({ name: 'id', example: '89e22db8-f5da-4694-a5cd-e7c5cc668d70' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Delete()
   async deleteCustomer(@Res() res: Response, @Query('id') id: string) {
     try {

@@ -22,6 +22,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { IProductRepo } from '../../domain/repository/IProductRepo';
+import { Roles } from 'nest-keycloak-connect';
 
 @ApiTags('Produtos')
 @Controller('product')
@@ -40,6 +41,7 @@ export class ProductController extends BaseController {
   })
   @ApiBody({ type: ProductDTO, required: true })
   @ApiResponse({ status: 201 })
+  @Roles({ roles: ['realm:admin'] })
   @Post('create')
   async create(@Res() res: Response, @Body() dto: ProductDTO) {
     try {
@@ -55,6 +57,7 @@ export class ProductController extends BaseController {
   })
   @ApiQuery({ name: 'id', example: 'd4c90ffa-d4c9-4c5a-8b3a-e4f6f355112b' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Get('')
   async find(@Res() res: Response, @Query('id') id: string) {
     try {
@@ -71,6 +74,7 @@ export class ProductController extends BaseController {
   @ApiQuery({ name: 'id', example: 'd4c90ffa-d4c9-4c5a-8b3a-e4f6f355112b' })
   @ApiBody({ type: ProductDTO, required: true })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Put()
   async updateProduct(
     @Res() res: Response,
@@ -90,6 +94,7 @@ export class ProductController extends BaseController {
   })
   @ApiQuery({ name: 'id', example: 'd4c90ffa-d4c9-4c5a-8b3a-e4f6f355112b' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Delete()
   async deleteProduct(@Res() res: Response, @Query('id') id: string) {
     try {
