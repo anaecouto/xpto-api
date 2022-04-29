@@ -31,6 +31,7 @@ import { ListCustomersWhoSpentMostByDayUseCase } from '../../application/useCase
 import { ListCustomersWhoSpentMostByMonthUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByMonthUseCase';
 import { ListCustomersWhoSpentMostByYearUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByYearUseCase';
 import ProductsCustomerQuery from '../../application/query/ProductsCustomerQuery';
+import { Public, Roles } from 'nest-keycloak-connect';
 
 @ApiTags('Compras')
 @Controller('purchase')
@@ -71,6 +72,7 @@ export class ProductsCustomerController extends BaseController {
   })
   @ApiBody({ type: PurchaseDTO, required: true })
   @ApiResponse({ status: 201 })
+  @Public()
   @Post('new')
   async create(@Res() res: Response, @Body() dto: PurchaseDTO) {
     try {
@@ -86,6 +88,7 @@ export class ProductsCustomerController extends BaseController {
   })
   @ApiResponse({ status: 200 })
   @ApiQuery({ name: 'id', example: 'b1e10434-2230-4d7f-a0ff-1684908e105c' })
+  @Roles({ roles: ['realm:admin'] })
   @Get('')
   async findPurchaseById(@Res() res: Response, @Query('id') id: string) {
     try {
@@ -101,6 +104,7 @@ export class ProductsCustomerController extends BaseController {
   })
   @ApiQuery({ name: 'id', example: '89e22db8-f5da-4694-a5cd-e7c5cc668d70' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Get('id')
   async filterPurchasesById(@Res() res: Response, @Query('id') id: string) {
     try {
@@ -119,6 +123,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiQuery({ name: 'month', example: '04' })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Get('day')
   async filterCustomerPurchasesByDay(
     @Res() res: Response,
@@ -147,6 +152,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiQuery({ name: 'month', example: '04' })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Get('month')
   async filterCustomerPurchasesByMonth(
     @Res() res: Response,
@@ -172,6 +178,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiQuery({ name: 'id', example: '89e22db8-f5da-4694-a5cd-e7c5cc668d70' })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Get('year')
   async filterCustomerPurchasesByYear(
     @Res() res: Response,
@@ -196,6 +203,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiQuery({ name: 'month', example: '04' })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @Public()
   @Get('sold/day')
   async listMostSoldProductsByDay(
     @Res() res: Response,
@@ -221,6 +229,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiQuery({ name: 'month', example: '04' })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @Public()
   @Get('sold/month')
   async listMostSoldProductsByMonth(
     @Res() res: Response,
@@ -243,6 +252,7 @@ export class ProductsCustomerController extends BaseController {
   })
   @ApiQuery({ name: 'mês', example: '04' })
   @ApiResponse({ status: 200 })
+  @Public()
   @Get('sold/year')
   async listMostSoldProductsByYear(
     @Res() res: Response,
@@ -265,6 +275,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiQuery({ name: 'month', example: '04' })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Get('customers/sold/day')
   async listCustomerWhoSpentMostByDay(
     @Res() res: Response,
@@ -290,6 +301,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiQuery({ name: 'month', example: '04' })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Get('customers/sold/month')
   async listCustomerWhoSpentMostByMonth(
     @Res() res: Response,
@@ -312,6 +324,7 @@ export class ProductsCustomerController extends BaseController {
   })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @Roles({ roles: ['realm:admin'] })
   @Get('customers/sold/year')
   async listCustomerWhoSpentMostByYear(
     @Res() res: Response,
