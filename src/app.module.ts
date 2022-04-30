@@ -7,7 +7,7 @@ import {
   ResourceGuard,
   RoleGuard,
 } from 'nest-keycloak-connect';
-import { AuthModule } from './modules/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { XptoModule } from './modules/xpto/xpto.module';
 import { SharedModule } from './shared/shared.module';
 
