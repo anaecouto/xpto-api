@@ -1,6 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { GroupMostSoldArrayUtils } from 'src/shared/utils/GroupMostSoldArrayUtils';
 import { GroupMostSoldUtils } from 'src/shared/utils/GroupMostSoldUtils';
+import { SortArrayByDescendingUtils } from 'src/shared/utils/SortArrayByDescendingUtils';
 import { IProductsCustomerRepo } from '../../domain/repository/IProductsCustomerRepo';
 import { ProductsCustomerRepository } from '../../infra/repository/ProductsCustomerRepository';
 
@@ -33,9 +34,10 @@ export class ListMostSoldPurchasesByDayUseCase {
       mostSoldProductsByDay,
     );
 
-    const mostSoldProductsByDayList = productsArray.sort((a, b) => {
-      return b.quantity - a.quantity;
-    });
+    const mostSoldProductsByDayList = SortArrayByDescendingUtils.sortDescending(
+      productsArray,
+      'quantity',
+    );
 
     return mostSoldProductsByDayList;
   }
