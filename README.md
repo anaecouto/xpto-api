@@ -70,6 +70,9 @@ $ yarn start:debug
 localhost:3000/api/docs
 ```
 
+*** ATENÇÃO ***
+Para esta branch é necessário fazer a configuração do Keycloak para criação do usuário, autenticação e eventualmente utilizar as rotas que necessitam de autenticação. No momento, não haverá instruções de como realizar essa configuração pois ainda está em fase de desenvolvimento e testes.
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
