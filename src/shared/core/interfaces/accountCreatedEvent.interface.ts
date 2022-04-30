@@ -1,0 +1,7 @@
+export interface IAccountCreatedEvent {
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+}
