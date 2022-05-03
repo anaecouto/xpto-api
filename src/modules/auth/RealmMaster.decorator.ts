@@ -3,11 +3,9 @@ import { stringify } from 'querystring';
 import AppError from 'src/shared/core/errors/AppError';
 
 export function RealmMaster() {
-  return (target: any, propertyKey: any, descriptor: any) => {
+  return (target: any, propertyKey: any, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
-    const newDescriptor = { ...descriptor };
-
-    newDescriptor.value = async function (...args: any[]) {
+    descriptor.value = async function (...args: any[]) {
       const body = {
         grant_type: 'client_credentials',
         client_id: process.env.KEYCLOAK_MASTER_CLIENT_ID,
@@ -42,6 +40,6 @@ export function RealmMaster() {
       return originalMethod.apply(this, args);
     };
 
-    return newDescriptor;
+    return descriptor;
   };
 }

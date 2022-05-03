@@ -80,7 +80,7 @@ export class UserProvider {
         const userId = this.getKeycloakUserId(result);
         payload['id'] = userId;
 
-        return { message: 'Usuário criado com sucesso!' };
+        return { message: `Usuário ${payload['id']} criado com sucesso!` };
       })
       .catch((error) => {
         throw new KeycloakError(error.message, {

@@ -8,9 +8,9 @@ export default class KeycloakError extends Error {
 
   constructor(message?: string, data: any = {}) {
     if (data.status == '409') {
-      super('Failed to creat user.');
+      super('Failed to create user.');
       this.data = data;
-      this.data.message = 'Failed to creat user. User already exists!';
+      this.data.message = 'Failed to create user. User already exists!';
     } else {
       super(message);
 
