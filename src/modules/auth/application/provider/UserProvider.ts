@@ -60,6 +60,7 @@ export class UserProvider {
           temporary: false,
         },
       ],
+      groups: ['adminGroup'],
       enabled: true,
       emailVerified: true,
     };
