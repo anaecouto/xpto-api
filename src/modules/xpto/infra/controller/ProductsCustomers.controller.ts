@@ -82,7 +82,7 @@ export class ProductsCustomerController extends BaseController {
     summary: 'Lista todas as compras',
   })
   @ApiResponse({ status: 200 })
-  @Get('')
+  @Get('all')
   async listAllPurchases(@Res() res: Response) {
     try {
       const result = await this.productsCustomerQuery.listAllPurchases();
