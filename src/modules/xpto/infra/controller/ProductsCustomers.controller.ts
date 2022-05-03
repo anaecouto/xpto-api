@@ -267,7 +267,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiOperation({
     summary: 'Lista produtos mais vendidos do ano',
   })
-  @ApiQuery({ name: 'mês', example: '04' })
+  @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
   @Get('sold/year')
   async listMostSoldProductsByYear(
