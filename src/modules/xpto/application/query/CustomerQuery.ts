@@ -19,6 +19,7 @@ export default class CustomerQuery {
     const customerDomain = CustomerMapper.toDomain(
       createCustomerDTO as Customer,
     );
+    console.log(customerDomain);
     return await this.customerRepository.save(customerDomain);
   }
 
