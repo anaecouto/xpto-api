@@ -13,4 +13,12 @@ export default class ProductsCustomerQuery {
   async findById(id: string): Promise<ProductsCustomerDomain> {
     return this.productsCustomerRepository.findById(id);
   }
+
+  async listAllPurchases(): Promise<ProductsCustomerDomain[]> {
+    return this.productsCustomerRepository.listAllPurchases();
+  }
+
+  async deletePurchase(id: string) {
+    this.productsCustomerRepository.delete(id);
+  }
 }

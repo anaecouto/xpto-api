@@ -6,6 +6,9 @@ export interface IProductsCustomerRepo {
   save(
     productsCustomer: ProductsCustomerDomain,
   ): Promise<ProductsCustomerDomain>;
+  listAllPurchases(): Promise<ProductsCustomerDomain[]>;
+  findById(id: string): Promise<ProductsCustomerDomain>;
+  delete(id: string);
   filterPurchasesById(id: string): Promise<ProductsCustomerDomain[]>;
   listAllPurchasesByDay(
     day: string,
@@ -17,5 +20,4 @@ export interface IProductsCustomerRepo {
     year: string,
   ): Promise<ProductsCustomerDomain[]>;
   listAllPurchasesByYear(year: string): Promise<ProductsCustomerDomain[]>;
-  findById(id: string): Promise<ProductsCustomerDomain>;
 }

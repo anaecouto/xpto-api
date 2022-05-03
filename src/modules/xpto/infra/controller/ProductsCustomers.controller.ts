@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Post,
@@ -78,7 +79,21 @@ export class ProductsCustomerController extends BaseController {
   }
 
   @ApiOperation({
-    summary: 'Lista uma compra por id',
+    summary: 'Lista todas as compras',
+  })
+  @ApiResponse({ status: 200 })
+  @Get('')
+  async listAllPurchases(@Res() res: Response) {
+    try {
+      const result = await this.productsCustomerQuery.listAllPurchases();
+      this.ok(res, result);
+    } catch (error) {
+      this.handleAppError(res, error);
+    }
+  }
+
+  @ApiOperation({
+    summary: 'Pega uma compra por id',
   })
   @ApiResponse({ status: 200 })
   @ApiQuery({ name: 'id', example: 'b1e10434-2230-4d7f-a0ff-1684908e105c' })
@@ -87,6 +102,21 @@ export class ProductsCustomerController extends BaseController {
     try {
       const result = await this.productsCustomerQuery.findById(id);
       this.ok(res, { purchase: result.props });
+    } catch (error) {
+      this.handleAppError(res, error);
+    }
+  }
+
+  @ApiOperation({
+    summary: 'Deleta uma compra por id',
+  })
+  @ApiResponse({ status: 204 })
+  @ApiQuery({ name: 'id', example: 'b1e10434-2230-4d7f-a0ff-1684908e105c' })
+  @Delete('')
+  async deletePurchaseById(@Res() res: Response, @Query('id') id: string) {
+    try {
+      await this.productsCustomerQuery.deletePurchase(id);
+      this.ok(res, { message: `Compra ${id} deletada com sucesso!` });
     } catch (error) {
       this.handleAppError(res, error);
     }

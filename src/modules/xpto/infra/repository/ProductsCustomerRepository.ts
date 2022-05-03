@@ -26,6 +26,30 @@ export class ProductsCustomerRepository
     return ProductsCustomerMapper.toDomain(savedProductsCustomer);
   }
 
+  async listAllPurchases(): Promise<ProductsCustomerDomain[]> {
+    const purchases = await this.prismaRepository.productsCustomer.findMany();
+
+    const purchasesDomain = purchases.map((purchase) => {
+      return ProductsCustomerMapper.toDomain(purchase);
+    });
+
+    return purchasesDomain;
+  }
+
+  async findById(id: string): Promise<ProductsCustomerDomain> {
+    const purchase = await this.prismaRepository.productsCustomer.findUnique({
+      where: { id },
+    });
+
+    return ProductsCustomerMapper.toDomain(purchase);
+  }
+
+  async delete(id: string) {
+    await this.prismaRepository.productsCustomer.delete({
+      where: { id },
+    });
+  }
+
   async filterPurchasesById(id: string): Promise<ProductsCustomerDomain[]> {
     const purchases = await this.prismaRepository.productsCustomer.findMany({
       where: { customerId: id },
@@ -91,13 +115,5 @@ export class ProductsCustomerRepository
     return purchasesDomain.filter((purchases) => {
       return purchases.created_at.getFullYear() === parseInt(year);
     });
-  }
-
-  async findById(id: string): Promise<ProductsCustomerDomain> {
-    const purchase = await this.prismaRepository.productsCustomer.findUnique({
-      where: { id },
-    });
-
-    return ProductsCustomerMapper.toDomain(purchase);
   }
 }
