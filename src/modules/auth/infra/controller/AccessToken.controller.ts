@@ -6,7 +6,7 @@ import { BaseController } from 'src/shared/infra/controller/BaseController';
 import { AccessTokenProvider } from '../../application/provider/AccessTokenProvider';
 import { IGetTokenKeycloakDTO } from '../dtos/GetTokenKeycloakDTO';
 
-@ApiTags('auth')
+@ApiTags('Auth')
 @Controller('auth')
 export class AccessTokenController extends BaseController {
   constructor(private accessTokenProvider: AccessTokenProvider) {
