@@ -10,20 +10,9 @@ export class FilterCustomerPurchasesByYearUseCase {
   ) {}
 
   async execute(id: string, year: string): Promise<ProductsCustomerDomain[]> {
-    const productsCustomers =
-      await this.productsCustomerRepository.filterPurchasesById(id);
+    const purchasesByYear =
+      await this.productsCustomerRepository.listAllPurchasesByYear(year);
 
-    return this.filterPurchasesByCustomerAndYear(year, productsCustomers);
-  }
-
-  private filterPurchasesByCustomerAndYear(
-    year: string,
-    purchasesDomain: ProductsCustomerDomain[],
-  ) {
-    return purchasesDomain.filter((customerPurchasesByYear) => {
-      return (
-        customerPurchasesByYear.created_at.getFullYear() === parseInt(year)
-      );
-    });
+    return purchasesByYear.filter((purchase) => purchase.customerId === id);
   }
 }
