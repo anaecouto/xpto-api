@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ProductsCustomer } from '@prisma/client';
 import { BaseRepository } from 'src/shared/core/BaseRepository';
 import { PrismaRepository } from 'src/shared/infra/database/prisma/PrismaRepository';
 import { ProductsCustomerMapper } from '../../application/mappers/ProductsCustomerMapper';
@@ -67,53 +68,54 @@ export class ProductsCustomerRepository
     month: string,
     year: string,
   ): Promise<ProductsCustomerDomain[]> {
-    const purchasesList =
-      await this.prismaRepository.productsCustomer.findMany();
+    const result: ProductsCustomer[] = await this.prisma
+      .$queryRaw`with newTable as (select id, "productId", "productName", "customerId", "totalValue", 
+      quantity, extract(year from created_at) as year,
+      extract(month from created_at) as month, 
+      extract(day from created_at) as day from products_customers)
+      select * from newTable where day = ${parseInt(day)} 
+      and year = ${parseInt(year)} and month = ${parseInt(month)}`;
 
-    const purchasesDomain = purchasesList.map((purchase) => {
+    const purchasesDomain = result.map((purchase) => {
       return ProductsCustomerMapper.toDomain(purchase);
     });
 
-    return purchasesDomain.filter((purchases) => {
-      return (
-        purchases.created_at.getDate() === parseInt(day) &&
-        purchases.created_at.getMonth() + 1 === parseInt(month) &&
-        purchases.created_at.getFullYear() === parseInt(year)
-      );
-    });
+    return purchasesDomain;
   }
 
   async listAllPurchasesByMonth(
     month: string,
     year: string,
   ): Promise<ProductsCustomerDomain[]> {
-    const purchasesList =
-      await this.prismaRepository.productsCustomer.findMany();
+    const result: ProductsCustomer[] = await this.prisma
+      .$queryRaw`with newTable as (select id, "productId", "productName", "customerId", "totalValue", 
+      quantity, extract(year from created_at) as year,
+      extract(month from created_at) as month, 
+      extract(day from created_at) as day from products_customers)
+      select * from newTable where year = ${parseInt(year)} 
+      and month = ${parseInt(month)}`;
 
-    const purchasesDomain = purchasesList.map((purchase) => {
+    const purchasesDomain = result.map((purchase) => {
       return ProductsCustomerMapper.toDomain(purchase);
     });
 
-    return purchasesDomain.filter((purchases) => {
-      return (
-        purchases.created_at.getMonth() + 1 === parseInt(month) &&
-        purchases.created_at.getFullYear() === parseInt(year)
-      );
-    });
+    return purchasesDomain;
   }
 
   async listAllPurchasesByYear(
     year: string,
   ): Promise<ProductsCustomerDomain[]> {
-    const purchasesList =
-      await this.prismaRepository.productsCustomer.findMany();
+    const result: ProductsCustomer[] = await this.prisma
+      .$queryRaw`with newTable as (select id, "productId", "productName", "customerId", "totalValue",
+      quantity, extract(year from created_at) as year,
+      extract(month from created_at) as month, 
+      extract(day from created_at) as day from products_customers)
+      select * from newTable where year = ${parseInt(year)}`;
 
-    const purchasesDomain = purchasesList.map((purchase) => {
+    const purchasesDomain = result.map((purchase) => {
       return ProductsCustomerMapper.toDomain(purchase);
     });
 
-    return purchasesDomain.filter((purchases) => {
-      return purchases.created_at.getFullYear() === parseInt(year);
-    });
+    return purchasesDomain;
   }
 }
