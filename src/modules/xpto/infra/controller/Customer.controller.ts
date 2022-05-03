@@ -10,7 +10,6 @@ import {
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { CustomerRepository } from '../repository/CustomerRepository';
 import CustomerQuery from '../../application/query/CustomerQuery';
 import { CustomerDTO } from './dtos/CustomerDTO';
 import { BaseController } from 'src/shared/infra/controller/BaseController';
@@ -21,14 +20,11 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { ICustomerRepo } from '../../domain/repository/ICustomerRepo';
 
 @ApiTags('Clientes')
 @Controller('customer')
 export class CustomerController extends BaseController {
   constructor(
-    @Inject(CustomerRepository)
-    private customerRepository: ICustomerRepo,
     @Inject(CustomerQuery)
     private customerQuery: CustomerQuery,
   ) {

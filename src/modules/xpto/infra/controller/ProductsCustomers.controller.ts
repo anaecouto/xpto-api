@@ -9,10 +9,8 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { BaseController } from 'src/shared/infra/controller/BaseController';
-import { ProductsCustomerRepository } from '../repository/ProductsCustomerRepository';
 import { PurchaseProductsUseCase } from '../../application/useCase/PurchaseProductsUseCase';
 import { PurchaseDTO } from './dtos/PurchaseDTO';
-import { IProductsCustomerRepo } from '../../domain/repository/IProductsCustomerRepo';
 import { FilterPurchasesByIdUseCase } from '../../application/useCase/FilterPurchasesByIdUseCase';
 import {
   ApiBody,
@@ -36,8 +34,6 @@ import ProductsCustomerQuery from '../../application/query/ProductsCustomerQuery
 @Controller('purchase')
 export class ProductsCustomerController extends BaseController {
   constructor(
-    @Inject(ProductsCustomerRepository)
-    private productRepository: IProductsCustomerRepo,
     @Inject(PurchaseProductsUseCase)
     private purchaseProductsUseCase: PurchaseProductsUseCase,
     @Inject(FilterPurchasesByIdUseCase)

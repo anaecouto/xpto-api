@@ -10,7 +10,6 @@ import {
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ProductRepository } from '../repository/ProductRepository';
 import ProductQuery from '../../application/query/ProductQuery';
 import { BaseController } from 'src/shared/infra/controller/BaseController';
 import { ProductDTO } from './dtos/ProductDTO';
@@ -21,14 +20,11 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { IProductRepo } from '../../domain/repository/IProductRepo';
 
 @ApiTags('Produtos')
 @Controller('product')
 export class ProductController extends BaseController {
   constructor(
-    @Inject(ProductRepository)
-    private productRepository: IProductRepo,
     @Inject(ProductQuery)
     private productQuery: ProductQuery,
   ) {
