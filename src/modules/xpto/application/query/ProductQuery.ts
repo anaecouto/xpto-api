@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Product } from '@prisma/client';
+import AppError from 'src/shared/core/errors/AppError';
 import { ProductDomain } from '../../domain/entity/ProductDomain';
 import { IProductRepo } from '../../domain/repository/IProductRepo';
 import { ProductDTO } from '../../infra/controller/dtos/ProductDTO';
@@ -19,14 +20,26 @@ export default class ProductQuery {
   }
 
   async findById(id: string): Promise<ProductDomain> {
-    return this.productRepository.findById(id);
+    try {
+      return await this.productRepository.findById(id);
+    } catch (e) {
+      throw new AppError('Produto inexistente', { status: 400 });
+    }
   }
 
   async updateProduct(id: string, params: ProductDTO): Promise<ProductDomain> {
-    return this.productRepository.update(id, params as ProductDomain);
+    try {
+      return await this.productRepository.update(id, params as ProductDomain);
+    } catch (e) {
+      throw new AppError('Produto inexistente', { status: 400 });
+    }
   }
 
   async deleteProduct(id: string) {
-    return await this.productRepository.delete(id);
+    try {
+      await this.productRepository.delete(id);
+    } catch (e) {
+      throw new AppError('Produto inexistente', { status: 400 });
+    }
   }
 }

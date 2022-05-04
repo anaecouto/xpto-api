@@ -1,39 +1,34 @@
 import { Inject } from '@nestjs/common';
 import AppError from 'src/shared/core/errors/AppError';
 import { ProductsCustomerDomain } from '../../domain/entity/ProductsCustomerDomain';
-import { ICustomerRepo } from '../../domain/repository/ICustomerRepo';
 import { IProductRepo } from '../../domain/repository/IProductRepo';
 import { IProductsCustomerRepo } from '../../domain/repository/IProductsCustomerRepo';
 import { PurchaseDTO } from '../../infra/controller/dtos/PurchaseDTO';
-import { CustomerRepository } from '../../infra/repository/CustomerRepository';
 import { ProductRepository } from '../../infra/repository/ProductRepository';
 import { ProductsCustomerRepository } from '../../infra/repository/ProductsCustomerRepository';
+import CustomerQuery from '../query/CustomerQuery';
+import ProductQuery from '../query/ProductQuery';
 
 export class PurchaseProductsUseCase {
   constructor(
-    @Inject(CustomerRepository) private customerRepository: ICustomerRepo,
     @Inject(ProductsCustomerRepository)
     private productsCustomerRepository: IProductsCustomerRepo,
     @Inject(ProductRepository)
     private productRepository: IProductRepo,
+    @Inject(CustomerQuery)
+    private customerQuery: CustomerQuery,
+    @Inject(ProductQuery)
+    private productQuery: ProductQuery,
   ) {}
 
   async execute(purchaseDTO: PurchaseDTO) {
-    const customerFound = await this.customerRepository.findById(
+    const customerFound = await this.customerQuery.findById(
       purchaseDTO.customerId,
     );
 
-    if (!customerFound) {
-      throw new AppError('Cliente inexistente!');
-    }
-
-    const productFound = await this.productRepository.findById(
+    const productFound = await this.productQuery.findById(
       purchaseDTO.productDetails.productId,
     );
-
-    if (!productFound) {
-      throw new AppError('Produto inexistente!');
-    }
 
     const quantity = purchaseDTO.productDetails.quantity;
 
@@ -49,7 +44,9 @@ export class PurchaseProductsUseCase {
     } as ProductsCustomerDomain;
 
     if (productFound.quantity <= 0) {
-      throw new AppError('Produto está indisponível no momento');
+      throw new AppError('Produto está indisponível no momento', {
+        status: 400,
+      });
     }
 
     await this.productRepository.purchaseAndUpdateProductQuantity(

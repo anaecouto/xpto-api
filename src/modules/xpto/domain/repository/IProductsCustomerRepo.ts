@@ -9,7 +9,6 @@ export interface IProductsCustomerRepo {
   listAllPurchases(): Promise<ProductsCustomerDomain[]>;
   findById(id: string): Promise<ProductsCustomerDomain>;
   delete(id: string);
-  filterPurchasesById(id: string): Promise<ProductsCustomerDomain[]>;
   listAllPurchasesByDay(
     day: string,
     month: string,

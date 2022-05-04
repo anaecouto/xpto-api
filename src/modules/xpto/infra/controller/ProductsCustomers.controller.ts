@@ -12,7 +12,6 @@ import { Response } from 'express';
 import { BaseController } from 'src/shared/infra/controller/BaseController';
 import { PurchaseProductsUseCase } from '../../application/useCase/PurchaseProductsUseCase';
 import { PurchaseDTO } from './dtos/PurchaseDTO';
-import { FilterPurchasesByIdUseCase } from '../../application/useCase/FilterPurchasesByIdUseCase';
 import {
   ApiBody,
   ApiOperation,
@@ -37,8 +36,6 @@ export class ProductsCustomerController extends BaseController {
   constructor(
     @Inject(PurchaseProductsUseCase)
     private purchaseProductsUseCase: PurchaseProductsUseCase,
-    @Inject(FilterPurchasesByIdUseCase)
-    private filterPurchasesByIdUseCase: FilterPurchasesByIdUseCase,
     @Inject(FilterCustomerPurchasesByDayUseCase)
     private filterCustomerPurchasesByDayUseCase: FilterCustomerPurchasesByDayUseCase,
     @Inject(FilterCustomerPurchasesByMonthUseCase)
@@ -117,21 +114,6 @@ export class ProductsCustomerController extends BaseController {
     try {
       await this.productsCustomerQuery.deletePurchase(id);
       this.ok(res, { message: `Compra ${id} deletada com sucesso!` });
-    } catch (error) {
-      this.handleAppError(res, error);
-    }
-  }
-
-  @ApiOperation({
-    summary: 'Filtra compras por id do cliente',
-  })
-  @ApiQuery({ name: 'id', example: '89e22db8-f5da-4694-a5cd-e7c5cc668d70' })
-  @ApiResponse({ status: 200 })
-  @Get('id')
-  async filterPurchasesById(@Res() res: Response, @Query('id') id: string) {
-    try {
-      const result = await this.filterPurchasesByIdUseCase.execute(id);
-      this.ok(res, result);
     } catch (error) {
       this.handleAppError(res, error);
     }

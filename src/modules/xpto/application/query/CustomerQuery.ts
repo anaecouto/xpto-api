@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Customer } from '@prisma/client';
+import AppError from 'src/shared/core/errors/AppError';
 import { CustomerDomain } from '../../domain/entity/CustomerDomain';
 import { ICustomerRepo } from '../../domain/repository/ICustomerRepo';
 import { CustomerDTO } from '../../infra/controller/dtos/CustomerDTO';
@@ -16,31 +17,51 @@ export default class CustomerQuery {
   async createCustomer(
     createCustomerDTO: CustomerDTO,
   ): Promise<CustomerDomain> {
-    const customerDomain = CustomerMapper.toDomain(
-      createCustomerDTO as Customer,
-    );
-    return await this.customerRepository.save(customerDomain);
+    try {
+      const customerDomain = CustomerMapper.toDomain(
+        createCustomerDTO as Customer,
+      );
+      return await this.customerRepository.save(customerDomain);
+    } catch (e) {
+      throw new AppError('Cliente já está cadastrado', { status: 400 });
+    }
   }
 
   async findById(id: string): Promise<CustomerDomain> {
-    return await this.customerRepository.findById(id);
+    try {
+      return await this.customerRepository.findById(id);
+    } catch (e) {
+      throw new AppError('Cliente não encontrado', { status: 400 });
+    }
   }
 
   async findCustomer(cpf: string): Promise<CustomerDomain> {
-    return await this.customerRepository.findByCpf(cpf);
+    try {
+      return await this.customerRepository.findByCpf(cpf);
+    } catch (e) {
+      throw new AppError('Cliente não encontrado', { status: 400 });
+    }
   }
 
   async updateCustomer(
     id: string,
     updateParams: CustomerDTO,
   ): Promise<CustomerDomain> {
-    return await this.customerRepository.update(
-      id,
-      updateParams as CustomerDomain,
-    );
+    try {
+      return await this.customerRepository.update(
+        id,
+        updateParams as CustomerDomain,
+      );
+    } catch (e) {
+      throw new AppError('Cliente não encontrado', { status: 400 });
+    }
   }
 
   async deleteCustomer(id: string) {
-    return await this.customerRepository.delete(id);
+    try {
+      await this.customerRepository.delete(id);
+    } catch (e) {
+      throw new AppError('Cliente não encontrado', { status: 400 });
+    }
   }
 }

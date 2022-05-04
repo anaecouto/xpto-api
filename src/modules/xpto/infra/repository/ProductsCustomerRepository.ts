@@ -51,18 +51,6 @@ export class ProductsCustomerRepository
     });
   }
 
-  async filterPurchasesById(id: string): Promise<ProductsCustomerDomain[]> {
-    const purchases = await this.prismaRepository.productsCustomer.findMany({
-      where: { customerId: id },
-    });
-
-    const purchasesDomain = purchases.map((purchase) => {
-      return ProductsCustomerMapper.toDomain(purchase);
-    });
-
-    return purchasesDomain;
-  }
-
   async listAllPurchasesByDay(
     day: string,
     month: string,

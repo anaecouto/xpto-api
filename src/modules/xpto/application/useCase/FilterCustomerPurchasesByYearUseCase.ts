@@ -1,4 +1,5 @@
 import { Inject } from '@nestjs/common';
+import AppError from 'src/shared/core/errors/AppError';
 import { ProductsCustomerDomain } from '../../domain/entity/ProductsCustomerDomain';
 import { IProductsCustomerRepo } from '../../domain/repository/IProductsCustomerRepo';
 import { ProductsCustomerRepository } from '../../infra/repository/ProductsCustomerRepository';
@@ -10,9 +11,13 @@ export class FilterCustomerPurchasesByYearUseCase {
   ) {}
 
   async execute(id: string, year: string): Promise<ProductsCustomerDomain[]> {
-    const purchasesByYear =
-      await this.productsCustomerRepository.listAllPurchasesByYear(year);
+    try {
+      const purchasesByYear =
+        await this.productsCustomerRepository.listAllPurchasesByYear(year);
 
-    return purchasesByYear.filter((purchase) => purchase.customerId === id);
+      return purchasesByYear.filter((purchase) => purchase.customerId === id);
+    } catch (e) {
+      throw new AppError('Cliente inválido', { status: 400 });
+    }
   }
 }

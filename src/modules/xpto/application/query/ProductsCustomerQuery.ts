@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import AppError from 'src/shared/core/errors/AppError';
 import { ProductsCustomerDomain } from '../../domain/entity/ProductsCustomerDomain';
 import { IProductsCustomerRepo } from '../../domain/repository/IProductsCustomerRepo';
 import { ProductsCustomerRepository } from '../../infra/repository/ProductsCustomerRepository';
@@ -11,14 +12,22 @@ export default class ProductsCustomerQuery {
   ) {}
 
   async findById(id: string): Promise<ProductsCustomerDomain> {
-    return this.productsCustomerRepository.findById(id);
+    try {
+      return await this.productsCustomerRepository.findById(id);
+    } catch (e) {
+      throw new AppError('Essa compra não existe', { status: 400 });
+    }
   }
 
   async listAllPurchases(): Promise<ProductsCustomerDomain[]> {
-    return this.productsCustomerRepository.listAllPurchases();
+    return await this.productsCustomerRepository.listAllPurchases();
   }
 
   async deletePurchase(id: string) {
-    this.productsCustomerRepository.delete(id);
+    try {
+      await this.productsCustomerRepository.delete(id);
+    } catch (e) {
+      throw new AppError('Essa compra não existe', { status: 400 });
+    }
   }
 }
