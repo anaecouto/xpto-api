@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
-import { GroupArrayByUtils } from 'src/shared/utils/GroupArrayByUtils';
 import { GroupByUtils } from 'src/shared/utils/GroupByUtils';
+import { GroupCustomersArrayByUtils } from 'src/shared/utils/GroupCustomersArrayByUtils';
 import { SortArrayByDescendingUtils } from 'src/shared/utils/SortArrayByDescendingUtils';
 import { IProductsCustomerRepo } from '../../domain/repository/IProductsCustomerRepo';
 import { ProductsCustomerRepository } from '../../infra/repository/ProductsCustomerRepository';
@@ -27,10 +27,12 @@ export class ListCustomersWhoSpentMostByMonthUseCase {
       return customerDTO;
     });
 
-    const productsGroupedByCustomerId =
-      GroupByUtils.groupBy(allProductsListDTO);
+    const productsGroupedByCustomerId = GroupByUtils.groupBy(
+      allProductsListDTO,
+      'customerId',
+    );
 
-    const valuesArray = GroupArrayByUtils.groupArrayBy(
+    const valuesArray = GroupCustomersArrayByUtils.groupArrayBy(
       productsGroupedByCustomerId,
     );
 

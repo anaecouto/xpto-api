@@ -1,11 +1,11 @@
 export class GroupByUtils {
-  static groupBy(array) {
-    return array.reduce((acc, property) => {
-      if (!acc[property.customerId]) {
-        acc[property.customerId] = [];
+  static groupBy(array: any[], att: string) {
+    return array.reduce((acc, object) => {
+      if (!acc[object[att]]) {
+        acc[object[att]] = [];
       }
 
-      acc[property.customerId].push(property);
+      acc[object[att]].push(object);
       return acc;
     }, {});
   }

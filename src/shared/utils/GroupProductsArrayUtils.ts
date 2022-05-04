@@ -1,17 +1,17 @@
-export class GroupArrayByUtils {
+export class GroupProductsArrayUtils {
   static groupArrayBy(productsGroupedByCustomerId) {
     const array = [];
     for (const key in productsGroupedByCustomerId) {
       let object;
-      let value = 0;
+      let quantity = 0;
 
       productsGroupedByCustomerId[key].forEach((e) => {
         object = {
-          customerId: e.customerId,
-          customerCpf: e.customerCpf,
-          totalValue: e.totalValue + value,
+          productId: e.productId,
+          productName: e.productName,
+          quantity: e.quantity + quantity,
         };
-        value = object.totalValue;
+        quantity = object.quantity;
       });
       array.push(object);
     }
