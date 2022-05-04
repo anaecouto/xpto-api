@@ -29,6 +29,7 @@ import { ListCustomersWhoSpentMostByDayUseCase } from '../../application/useCase
 import { ListCustomersWhoSpentMostByMonthUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByMonthUseCase';
 import { ListCustomersWhoSpentMostByYearUseCase } from '../../application/useCase/ListCustomersWhoSpentMostByYearUseCase';
 import ProductsCustomerQuery from '../../application/query/ProductsCustomerQuery';
+import { ListCustomerPurchasesByCustomerIdUseCase } from '../../application/useCase/ListCustomerPurchasesByCustomerIdUseCase';
 
 @ApiTags('Compras')
 @Controller('purchase')
@@ -36,6 +37,8 @@ export class ProductsCustomerController extends BaseController {
   constructor(
     @Inject(PurchaseProductsUseCase)
     private purchaseProductsUseCase: PurchaseProductsUseCase,
+    @Inject(ListCustomerPurchasesByCustomerIdUseCase)
+    private listCustomerPurchasesByCustomerIdUseCase: ListCustomerPurchasesByCustomerIdUseCase,
     @Inject(FilterCustomerPurchasesByDayUseCase)
     private filterCustomerPurchasesByDayUseCase: FilterCustomerPurchasesByDayUseCase,
     @Inject(FilterCustomerPurchasesByMonthUseCase)
@@ -83,6 +86,28 @@ export class ProductsCustomerController extends BaseController {
   async listAllPurchases(@Res() res: Response) {
     try {
       const result = await this.productsCustomerQuery.listAllPurchases();
+      this.ok(res, result);
+    } catch (error) {
+      this.handleAppError(res, error);
+    }
+  }
+
+  @ApiOperation({
+    summary: 'Lista todas as compras de um cliente por seu id',
+  })
+  @ApiQuery({
+    name: 'id',
+    example: 'c2e2724c-8825-421b-aed6-d570d87bcb93',
+  })
+  @ApiResponse({ status: 200 })
+  @Get('/customer')
+  async listAllCustomerPurchases(
+    @Query('id') customerId: string,
+    @Res() res: Response,
+  ) {
+    try {
+      const result =
+        await this.listCustomerPurchasesByCustomerIdUseCase.execute(customerId);
       this.ok(res, result);
     } catch (error) {
       this.handleAppError(res, error);

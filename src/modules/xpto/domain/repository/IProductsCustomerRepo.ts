@@ -7,6 +7,7 @@ export interface IProductsCustomerRepo {
     productsCustomer: ProductsCustomerDomain,
   ): Promise<ProductsCustomerDomain>;
   listAllPurchases(): Promise<ProductsCustomerDomain[]>;
+  listCustomerPurchases(customerId: string): Promise<ProductsCustomerDomain[]>;
   findById(id: string): Promise<ProductsCustomerDomain>;
   delete(id: string);
   listAllPurchasesByDay(

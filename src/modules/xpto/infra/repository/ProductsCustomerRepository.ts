@@ -37,6 +37,21 @@ export class ProductsCustomerRepository
     return purchasesDomain;
   }
 
+  async listCustomerPurchases(
+    customerId: string,
+  ): Promise<ProductsCustomerDomain[]> {
+    const purchases = await this.prismaRepository.productsCustomer.findMany({
+      where: {
+        customerId,
+      },
+    });
+    const purchasesDomain = purchases.map((purchase) => {
+      return ProductsCustomerMapper.toDomain(purchase);
+    });
+
+    return purchasesDomain;
+  }
+
   async findById(id: string): Promise<ProductsCustomerDomain> {
     const purchase = await this.prismaRepository.productsCustomer.findUnique({
       where: { id },

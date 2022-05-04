@@ -6,6 +6,7 @@ import ProductsCustomerQuery from './application/query/ProductsCustomerQuery';
 import { FilterCustomerPurchasesByDayUseCase } from './application/useCase/FilterCustomerPurchasesByDayUseCase';
 import { FilterCustomerPurchasesByMonthUseCase } from './application/useCase/FilterCustomerPurchasesByMonthUseCase';
 import { FilterCustomerPurchasesByYearUseCase } from './application/useCase/FilterCustomerPurchasesByYearUseCase';
+import { ListCustomerPurchasesByCustomerIdUseCase } from './application/useCase/ListCustomerPurchasesByCustomerIdUseCase';
 import { ListCustomersWhoSpentMostByDayUseCase } from './application/useCase/ListCustomersWhoSpentMostByDayUseCase';
 import { ListCustomersWhoSpentMostByMonthUseCase } from './application/useCase/ListCustomersWhoSpentMostByMonthUseCase';
 import { ListCustomersWhoSpentMostByYearUseCase } from './application/useCase/ListCustomersWhoSpentMostByYearUseCase';
@@ -35,6 +36,7 @@ import { ProductsCustomerRepository } from './infra/repository/ProductsCustomerR
     ProductRepository,
     ProductQuery,
     PurchaseProductsUseCase,
+    ListCustomerPurchasesByCustomerIdUseCase,
     FilterCustomerPurchasesByDayUseCase,
     FilterCustomerPurchasesByMonthUseCase,
     FilterCustomerPurchasesByYearUseCase,
