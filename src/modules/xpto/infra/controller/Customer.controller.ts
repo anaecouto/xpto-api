@@ -35,7 +35,8 @@ export class CustomerController extends BaseController {
     summary: 'Cria um novo cliente',
   })
   @ApiBody({ type: CustomerDTO, required: true })
-  @ApiResponse({ status: 201 })
+  @ApiResponse({ status: 201, description: 'Cliente cadastrado com sucesso!' })
+  @ApiResponse({ status: 400, description: 'Cliente já está cadastrado' })
   @Post('create')
   async create(@Res() res: Response, @Body() dto: CustomerDTO) {
     try {
@@ -51,6 +52,7 @@ export class CustomerController extends BaseController {
   })
   @ApiQuery({ name: 'cpf', example: '44931857914' })
   @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 404, description: 'Cliente não encontrado' })
   @Get()
   async findCustomer(@Res() res: Response, @Query('cpf') cpf: string) {
     try {
@@ -67,6 +69,7 @@ export class CustomerController extends BaseController {
   @ApiQuery({ name: 'id', example: '89e22db8-f5da-4694-a5cd-e7c5cc668d70' })
   @ApiBody({ type: CustomerDTO, required: true })
   @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 404, description: 'Cliente não encontrado' })
   @Put()
   async updateCustomer(
     @Res() res: Response,
@@ -88,7 +91,8 @@ export class CustomerController extends BaseController {
     summary: 'Deleta um cliente',
   })
   @ApiQuery({ name: 'id', example: '89e22db8-f5da-4694-a5cd-e7c5cc668d70' })
-  @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 200, description: 'Cliente deletado com sucesso!' })
+  @ApiResponse({ status: 404, description: 'Cliente não encontrado' })
   @Delete()
   async deleteCustomer(@Res() res: Response, @Query('id') id: string) {
     try {

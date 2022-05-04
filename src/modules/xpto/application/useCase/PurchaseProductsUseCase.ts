@@ -45,7 +45,7 @@ export class PurchaseProductsUseCase {
 
     if (productFound.quantity <= 0) {
       throw new AppError('Produto está indisponível no momento', {
-        status: 400,
+        status: 404,
       });
     }
 

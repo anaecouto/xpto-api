@@ -23,7 +23,7 @@ export default class ProductQuery {
     try {
       return await this.productRepository.findById(id);
     } catch (e) {
-      throw new AppError('Produto inexistente', { status: 400 });
+      throw new AppError('Produto inexistente', { status: 404 });
     }
   }
 
@@ -31,7 +31,7 @@ export default class ProductQuery {
     try {
       return await this.productRepository.update(id, params as ProductDomain);
     } catch (e) {
-      throw new AppError('Produto inexistente', { status: 400 });
+      throw new AppError('Produto inexistente', { status: 404 });
     }
   }
 
@@ -39,7 +39,7 @@ export default class ProductQuery {
     try {
       await this.productRepository.delete(id);
     } catch (e) {
-      throw new AppError('Produto inexistente', { status: 400 });
+      throw new AppError('Produto inexistente', { status: 404 });
     }
   }
 }

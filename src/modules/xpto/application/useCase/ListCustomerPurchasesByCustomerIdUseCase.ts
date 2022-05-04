@@ -21,7 +21,7 @@ export class ListCustomerPurchasesByCustomerIdUseCase {
         customerId,
       );
     } catch (e) {
-      throw new AppError('Cliente inválido', { status: 400 });
+      throw new AppError('Cliente inválido', { status: 404 });
     }
   }
 }

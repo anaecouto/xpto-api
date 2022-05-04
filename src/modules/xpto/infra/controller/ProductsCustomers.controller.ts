@@ -100,6 +100,7 @@ export class ProductsCustomerController extends BaseController {
     example: 'c2e2724c-8825-421b-aed6-d570d87bcb93',
   })
   @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 404, description: 'Cliente inválido' })
   @Get('/customer')
   async listAllCustomerPurchases(
     @Query('id') customerId: string,
@@ -118,6 +119,7 @@ export class ProductsCustomerController extends BaseController {
     summary: 'Pega uma compra por id',
   })
   @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 404, description: 'Essa compra não existe' })
   @ApiQuery({ name: 'id', example: 'b1e10434-2230-4d7f-a0ff-1684908e105c' })
   @Get('')
   async findPurchaseById(@Res() res: Response, @Query('id') id: string) {
@@ -134,6 +136,7 @@ export class ProductsCustomerController extends BaseController {
   })
   @ApiResponse({ status: 204 })
   @ApiQuery({ name: 'id', example: 'b1e10434-2230-4d7f-a0ff-1684908e105c' })
+  @ApiResponse({ status: 404, description: 'Essa compra não existe' })
   @Delete('')
   async deletePurchaseById(@Res() res: Response, @Query('id') id: string) {
     try {
@@ -152,6 +155,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiQuery({ name: 'month', example: '04' })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 404, description: 'Cliente inválido' })
   @Get('day')
   async filterCustomerPurchasesByDay(
     @Res() res: Response,
@@ -180,6 +184,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiQuery({ name: 'month', example: '04' })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 404, description: 'Cliente inválido' })
   @Get('month')
   async filterCustomerPurchasesByMonth(
     @Res() res: Response,
@@ -205,6 +210,7 @@ export class ProductsCustomerController extends BaseController {
   @ApiQuery({ name: 'id', example: '89e22db8-f5da-4694-a5cd-e7c5cc668d70' })
   @ApiQuery({ name: 'year', example: '2022' })
   @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 404, description: 'Cliente inválido' })
   @Get('year')
   async filterCustomerPurchasesByYear(
     @Res() res: Response,

@@ -31,7 +31,7 @@ export default class CustomerQuery {
     try {
       return await this.customerRepository.findById(id);
     } catch (e) {
-      throw new AppError('Cliente não encontrado', { status: 400 });
+      throw new AppError('Cliente não encontrado', { status: 404 });
     }
   }
 
@@ -39,7 +39,7 @@ export default class CustomerQuery {
     try {
       return await this.customerRepository.findByCpf(cpf);
     } catch (e) {
-      throw new AppError('Cliente não encontrado', { status: 400 });
+      throw new AppError('Cliente não encontrado', { status: 404 });
     }
   }
 
@@ -53,7 +53,7 @@ export default class CustomerQuery {
         updateParams as CustomerDomain,
       );
     } catch (e) {
-      throw new AppError('Cliente não encontrado', { status: 400 });
+      throw new AppError('Cliente não encontrado', { status: 404 });
     }
   }
 
@@ -61,7 +61,7 @@ export default class CustomerQuery {
     try {
       await this.customerRepository.delete(id);
     } catch (e) {
-      throw new AppError('Cliente não encontrado', { status: 400 });
+      throw new AppError('Cliente não encontrado', { status: 404 });
     }
   }
 }

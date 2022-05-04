@@ -15,7 +15,7 @@ export default class ProductsCustomerQuery {
     try {
       return await this.productsCustomerRepository.findById(id);
     } catch (e) {
-      throw new AppError('Essa compra não existe', { status: 400 });
+      throw new AppError('Essa compra não existe', { status: 404 });
     }
   }
 
@@ -27,7 +27,7 @@ export default class ProductsCustomerQuery {
     try {
       await this.productsCustomerRepository.delete(id);
     } catch (e) {
-      throw new AppError('Essa compra não existe', { status: 400 });
+      throw new AppError('Essa compra não existe', { status: 404 });
     }
   }
 }

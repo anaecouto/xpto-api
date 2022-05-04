@@ -35,7 +35,7 @@ export class ProductController extends BaseController {
     summary: 'Insere um novo produto',
   })
   @ApiBody({ type: ProductDTO, required: true })
-  @ApiResponse({ status: 201 })
+  @ApiResponse({ status: 201, description: 'Produto cadastrado com sucesso!' })
   @Post('create')
   async create(@Res() res: Response, @Body() dto: ProductDTO) {
     try {
@@ -51,6 +51,7 @@ export class ProductController extends BaseController {
   })
   @ApiQuery({ name: 'id', example: 'd4c90ffa-d4c9-4c5a-8b3a-e4f6f355112b' })
   @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 404, description: 'Produto inexistente' })
   @Get('')
   async find(@Res() res: Response, @Query('id') id: string) {
     try {
@@ -67,6 +68,7 @@ export class ProductController extends BaseController {
   @ApiQuery({ name: 'id', example: 'd4c90ffa-d4c9-4c5a-8b3a-e4f6f355112b' })
   @ApiBody({ type: ProductDTO, required: true })
   @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 404, description: 'Produto inexistente' })
   @Put()
   async updateProduct(
     @Res() res: Response,
@@ -85,7 +87,8 @@ export class ProductController extends BaseController {
     summary: 'Deleta um produto',
   })
   @ApiQuery({ name: 'id', example: 'd4c90ffa-d4c9-4c5a-8b3a-e4f6f355112b' })
-  @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 200, description: 'Produto deletado com sucesso!' })
+  @ApiResponse({ status: 404, description: 'Produto inexistente' })
   @Delete()
   async deleteProduct(@Res() res: Response, @Query('id') id: string) {
     try {

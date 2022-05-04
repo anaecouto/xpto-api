@@ -29,7 +29,7 @@ export class FilterCustomerPurchasesByMonthUseCase {
 
       return purchasesByMonth.filter((purchase) => purchase.customerId === id);
     } catch (e) {
-      throw new AppError('Cliente inválido', { status: 400 });
+      throw new AppError('Cliente inválido', { status: 404 });
     }
   }
 }
