@@ -1,0 +1,19 @@
+
+*** REQUISITOS DE FUNCIONAMENTO ***
+[x] - A aplicação deve ser capaz de listar, cadastrar, atualizar e deletar um produto, cliente e compra.
+[x] - A aplicação deve ser capaz de filtrar as compras por cliente.
+[x] - A aplicação deve ser capaz de listar as compras de um cliente por dia, mês e ano.
+[x] - A aplicação deve ser capaz de listar de forma ordenada os produtos mais vendidos por dia, mês e ano.
+[x] - A aplicação deve ser capaz de listar de forma ordenada os clientes que mais gastam por dia, mês e ano.
+[x] - A quantidade em estoque de um produto deve ser subtraída na efetivação de uma compra.
+[x] - O cliente deve ter no mínimo as seguintes propriedades: nome, telefone e email.
+[x] - O produto deve conter as seguintes propriedades: nome, quantidade em estoque e preço.
+
+*** ESPECIFICAÇÕES DO PROJETO ***
+[x] - Deve ser desenvolvida em algumas das linguagens: NodeJS, Elixir, Python, Golang.
+[x] - Deve ser documentado as instruções de como construir, rodar e quais são funcionalidades contempladas e como funcionam.
+[x] - Pode ser utilizado qualquer framework que facilite o desenvolvimento.
+[x] - Pode conter migrations para o gerenciamento das tabelas no banco de dados.
+[-] - Pode conter testes unitários ou de integração. <- FEITO PARCIALMENTE
+[x] - Podem ser inseridos mensagens de logs para a rastreabilidade de erros
+[x] - Pode ser implementado a captura de exceções para evitar comportamentos inesperados.
