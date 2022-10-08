@@ -9,16 +9,17 @@ export function RealmMaster() {
 
     newDescriptor.value = async function (...args: any[]) {
       const body = {
-        grant_type: 'client_credentials',
+        grant_type: 'password',
         client_id: process.env.KEYCLOAK_MASTER_CLIENT_ID,
-        client_secret: process.env.KEYCLOAK_MASTER_CLIENT_SECRET,
+        username: process.env.KEYCLOAK_ADMIN_USERNAME,
+        password: process.env.KEYCLOAK_ADMIN_PASSWORD
       };
 
       const requestConfig = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        url: `${process.env.KEYCLOAK_URL}/realms/xpto-api/protocol/openid-connect/token`,
+        url: `${process.env.KEYCLOAK_URL}/realms/master/protocol/openid-connect/token`,
         method: 'POST',
         data: stringify(body),
       } as AxiosRequestConfig;

@@ -26,10 +26,7 @@ export class AccessTokenProvider extends BaseKeycloakProvider {
     const body = {
       client_id: process.env.KEYCLOAK_CLIENT_ID,
       client_secret: process.env.KEYCLOAK_CLIENT_SECRET,
-      username: payload.username,
-      password: payload.password,
-      grant_type: 'password',
-      scope: 'openid',
+      grant_type: 'client_credentials',
     };
 
     const requestConfig = {
