@@ -3742,10 +3742,10 @@ jwk-to-pem@^2.0.0:
     elliptic "^6.5.4"
     safe-buffer "^5.0.1"
 
-keycloak-connect@^18.0.0:
-  version "18.0.0"
-  resolved "https://registry.yarnpkg.com/keycloak-connect/-/keycloak-connect-18.0.0.tgz#ad8a2e1af691f7fdee3ff15f84e05d86cdd5a218"
-  integrity sha512-CRzK7NRoExCOq04nFDB2aADflRFnXUTNlE1bpvhDwAF5fuB9qeRPBuNTNy8bbbzs9xQkDiUGAqwkYX9XBSX3sw==
+keycloak-connect@^19.0.3:
+  version "19.0.3"
+  resolved "https://registry.yarnpkg.com/keycloak-connect/-/keycloak-connect-19.0.3.tgz#9758024246c1c35e7f7d146299e3081a289a8bde"
+  integrity sha512-unZDlBHO9RJILM9hngJ7tLMK79pTLpLmQr18IFUtIrAQxfYatGm4tTP8zGaPaVwm48GZhOAl4dRpe0yw+Mlwcg==
   dependencies:
     jwk-to-pem "^2.0.0"
   optionalDependencies:
@@ -4010,10 +4010,10 @@ neo-async@^2.6.0, neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-nest-keycloak-connect@^1.8.3:
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/nest-keycloak-connect/-/nest-keycloak-connect-1.8.3.tgz#5781db11494000109c1741f5b6244d6ac6198096"
-  integrity sha512-WPDFlcoP5bVgTLENP7JMrK6DD+cWt9DYzoPdsAkZB75f7Xg4vyQDHH0ubFfy+Gr182mHQ4BA6Y+7jcmFLEIePg==
+nest-keycloak-connect@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/nest-keycloak-connect/-/nest-keycloak-connect-1.9.0.tgz#3e4569a78581176f92b0ed0e353b8cd43e508489"
+  integrity sha512-vR9rBapX2ITJYaaSDMD/+J5myR9wHLvCaLxYn76QXOo9hyBADChNTjVyje96cW4syxX41hY9ozvek/BBeCtecQ==
 
 nestjs-redoc@^2.2.2:
   version "2.2.2"
