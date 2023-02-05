@@ -9,10 +9,9 @@ export function RealmMaster() {
 
     newDescriptor.value = async function (...args: any[]) {
       const body = {
-        grant_type: 'password',
+        grant_type: 'client_credentials',
         client_id: process.env.KEYCLOAK_MASTER_CLIENT_ID,
-        username: process.env.KEYCLOAK_ADMIN_USERNAME,
-        password: process.env.KEYCLOAK_ADMIN_PASSWORD
+        client_secret: process.env.KEYCLOAK_MASTER_CLIENT_SECRET,
       };
 
       const requestConfig = {

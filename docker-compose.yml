@@ -17,6 +17,7 @@ services:
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: Pa55w0rd
+    restart: always
     ports:
       - 8080:8080
     depends_on:

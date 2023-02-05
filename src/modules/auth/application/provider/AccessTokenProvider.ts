@@ -24,9 +24,10 @@ export class AccessTokenProvider extends BaseKeycloakProvider {
   public async token(payload: IGetTokenKeycloakDTO): Promise<TokenResponse> {
     const realmTarget = process.env.KEYCLOAK_REALM;
     const body = {
+      ...payload,
+      grant_type: 'password',
       client_id: process.env.KEYCLOAK_CLIENT_ID,
-      client_secret: process.env.KEYCLOAK_CLIENT_SECRET,
-      grant_type: 'client_credentials',
+      client_secret: process.env.KEYCLOAK_CLIENT_SECRET
     };
 
     const requestConfig = {
