@@ -11,7 +11,7 @@ create-registry:
 	k3d registry create registry.localhost --port 5000
 
 create-cluster:
-	k3d cluster create $(CLUSTER_NAME) --registry-use $(REGISTRY) --port "8889:80@loadbalancer" --port "8887:443@loadbalancer"
+	k3d cluster create $(CLUSTER_NAME)
 
 build-image:
 	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) .
