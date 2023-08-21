@@ -88,8 +88,9 @@ Após tudo pronto, os processos de build tag e push devem ser feitos manualmente
 3) Colocar tag e fazer o push no registry do github
 4) Fazer deploy do github-controller
 5) Fazer deploy dos runners passando o GITHUB_TOKEN
-6) Fazer o deploy do argocd
-7) Fazer o deploy da aplicação
+6) Criar a secret do registry do ghcr
+7) Fazer o deploy do argocd
+8) Fazer o deploy da aplicação
 
 Após tudo pronto, agora o processo está automatizado. Deve-se trocar a imagem do package.json e do values.yaml da aplicação.
 

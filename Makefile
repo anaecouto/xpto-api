@@ -1,3 +1,5 @@
+include .env
+
 IMAGE_NAME=xpto-api
 RELEASE_NAME=xpto-api
 NAMESPACE=app
@@ -32,11 +34,11 @@ deploy-runners:
 	kubectl apply -f .\charts\actions-controller\templates\runner.yaml
 
 create-ghcr-secret:
-	kubectl --namespace=$(NAMESPACE) create secret docker-registry gcr-json-key \
-    --docker-server=https://gcr.io \
+	kubectl create secret docker-registry gcr-json-key \
+    --docker-server=ghcr.io \
     --docker-username=$(GITHUB_USERNAME) \
     --docker-password="$(GITHUB_TOKEN)" \
-    --docker-email=$(GITHUB_EMAIL)
+    --docker-email=$(GITHUB_EMAIL) --namespace=$(NAMESPACE)
 
 deploy-argocd:
 	helm upgrade --install argocd argo-cd/argo-cd --values .\charts\argocd\values.yaml --namespace argocd --create-namespace
