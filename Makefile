@@ -23,7 +23,9 @@ push-image:
 	docker push $(REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 deploy-runner-controller:
-	helm upgrade --install github-runner actions-runner-controller/actions-runner-controller --values .\charts\actions-controller\values.yaml --namespace github-actions --create-namespace
+	helm upgrade --install github-runner actions-runner-controller/actions-runner-controller \
+	--set authSecret.github_token=$(GITHUB_TOKEN) \
+	--values .\charts\actions-controller\values.yaml --namespace github-actions --create-namespace
 
 deploy-runners:
 	kubectl apply -f .\charts\actions-controller\templates\runner.yaml
@@ -33,3 +35,6 @@ deploy-argocd:
 
 deploy-image:
 	helm upgrade --install --namespace $(NAMESPACE) $(RELEASE_NAME) .\charts\app --create-namespace
+
+test-bla:
+	echo $(GITHUB_TOKEN)
