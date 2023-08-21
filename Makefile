@@ -5,13 +5,11 @@ IMAGE_TAG:=$(shell jq -r '.version' package.json)
 REGISTRY=k3d-registry.localhost:5000
 CLUSTER_NAME=my-cluster
 
-.PHONY: build-image tag-image push-image
-
 create-registry:
 	k3d registry create registry.localhost --port 5000
 
 create-cluster:
-	k3d cluster create $(CLUSTER_NAME) --registry-use $(REGISTRY)
+	k3d cluster create $(CLUSTER_NAME) --registry-use $(REGISTRY) --port "8889:80@loadbalancer" --port "8887:443@loadbalancer"
 
 build-image:
 	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) .
