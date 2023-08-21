@@ -20,8 +20,8 @@ tag-image:
 push-image:
 	docker push $(REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)
 
+deploy-argocd:
+	helm upgrade --install argocd argo-cd/argo-cd --values .\charts\argocd\values.yaml --namespace argocd --create-namespace
+
 deploy-image:
 	helm upgrade --install --namespace $(NAMESPACE) $(RELEASE_NAME) .\charts\app --create-namespace
-
-# deploy-argocd:
-# 	helm upgrade --install --namespace argocd argocd .\charts\argocd --create-namespace

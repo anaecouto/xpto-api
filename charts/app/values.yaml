@@ -98,15 +98,3 @@ postgresql:
   service:
     ports:
       postgresql: 5432
-
-argo-cd:
-  dex:
-    enabled: false
-  server:
-    extraArgs:
-      - --insecure
-    config:
-      repositories: |
-        - type: helm
-          name: argo-cd
-          url: https://argoproj.github.io/argo-helm
