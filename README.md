@@ -76,18 +76,22 @@ localhost:3000/api/docs
 2) Criar um cluster que utilize esse registry
 3) Buildar a imagem
 4) Colocar tag e fazer o push no private registry
-7) Fazer o deploy do argocd
-8) Fazer o deploy da aplicação
+5) Fazer o deploy do argocd
+6) Fazer o deploy da aplicação
+
+Após tudo pronto, os processos de build tag e push devem ser feitos manualmente.
 
 ## Kubernetes com CD utilizando GitHub Actions
 
-2) Criar um cluster
-3) Buildar a imagem
-4) Colocar tag e fazer o push no registry do github
-5) Fazer deploy do github-controller
-6) Fazer deploy dos runners passando o GITHUB_TOKEN
-7) Fazer o deploy do argocd
-8) Fazer o deploy da aplicação
+1) Criar um cluster
+2) Buildar a imagem
+3) Colocar tag e fazer o push no registry do github
+4) Fazer deploy do github-controller
+5) Fazer deploy dos runners passando o GITHUB_TOKEN
+6) Fazer o deploy do argocd
+7) Fazer o deploy da aplicação
+
+Após tudo pronto, agora o processo está automatizado. Deve-se trocar a imagem do package.json e do values.yaml da aplicação.
 
 ## Support
 
