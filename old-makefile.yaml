@@ -4,7 +4,7 @@ IMAGE_NAME=xpto-api
 RELEASE_NAME=xpto-api
 NAMESPACE=app
 IMAGE_TAG:=$(shell jq -r '.version' package.json)
-REGISTRY=ghcr.io/anaecouto
+REGISTRY=k3d-registry.localhost:5000
 CLUSTER_NAME=my-cluster
 
 create-registry:
