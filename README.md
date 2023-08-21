@@ -70,14 +70,24 @@ $ yarn start:debug
 localhost:3000/api/docs
 ```
 
-## Kubernetes com CD
+## Kubernetes com CD localmente
 
 1) Criar um registry privado para colocar a imagem da aplicação
 2) Criar um cluster que utilize esse registry
-3) Buildar a image
+3) Buildar a imagem
 4) Colocar tag e fazer o push no private registry
-5) Fazer o deploy do argocd
-5) Fazer o deploy da aplicação
+7) Fazer o deploy do argocd
+8) Fazer o deploy da aplicação
+
+## Kubernetes com CD utilizando GitHub Actions
+
+2) Criar um cluster
+3) Buildar a imagem
+4) Colocar tag e fazer o push no registry do github
+5) Fazer deploy do github-controller
+6) Fazer deploy dos runners passando o GITHUB_TOKEN
+7) Fazer o deploy do argocd
+8) Fazer o deploy da aplicação
 
 ## Support
 
