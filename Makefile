@@ -8,6 +8,9 @@ CLUSTER_NAME=my-cluster
 create-registry:
 	k3d registry create registry.localhost --port 5000
 
+create-cluster-with-registry:
+	k3d cluster create $(CLUSTER_NAME) --registry-use $(REGISTRY) --port "8889:80@loadbalancer" --port "8887:443@loadbalancer"
+
 create-cluster:
 	k3d cluster create $(CLUSTER_NAME)
 
@@ -33,6 +36,3 @@ deploy-argocd:
 
 deploy-image:
 	helm upgrade --install --namespace $(NAMESPACE) $(RELEASE_NAME) .\charts\app --create-namespace
-
-test-bla:
-	echo $(GITHUB_TOKEN)
