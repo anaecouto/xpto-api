@@ -34,10 +34,5 @@ deploy-runners:
 deploy-argocd:
 	helm upgrade --install argocd argo-cd/argo-cd --values .\charts\argocd\values.yaml --namespace argocd --create-namespace
 
-create-docker-secret:
-	kubectl create secret generic github-registry-secret \
-  	--from-file=.dockerconfigjson=config.json \
-  	--type=kubernetes.io/dockerconfigjson --namespace argocd
-
 deploy-image:
 	helm upgrade --install --namespace $(NAMESPACE) $(RELEASE_NAME) .\charts\app --create-namespace

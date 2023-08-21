@@ -14,9 +14,6 @@ spec:
     path: charts/app
     repoURL: https://github.com/anaecouto/xpto-api
     targetRevision: HEAD
-    imageCredentials:
-      - name: github-registry-secret
-        type: kubernetes.io/dockerconfigjson
   syncPolicy:
     automated:
       prune: true
