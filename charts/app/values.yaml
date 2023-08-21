@@ -10,7 +10,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "0.0.7"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: gcr-json-key
 nameOverride: "xpto-api"
 fullnameOverride: "xpto-api-chart"
 
