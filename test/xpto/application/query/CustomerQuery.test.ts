@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
-import CustomerQuery from 'src/modules/xpto/application/query/CustomerQuery';
-import { CustomerDomain } from 'src/modules/xpto/domain/entity/CustomerDomain';
-import { CustomerDTO } from 'src/modules/xpto/infra/controller/dtos/CustomerDTO';
-import { CustomerRepository } from 'src/modules/xpto/infra/repository/CustomerRepository';
+import CustomerQuery from '../../../../src/modules/xpto/application/query/CustomerQuery';
+import { CustomerDomain } from '../../../../src/modules/xpto/domain/entity/CustomerDomain';
+import { CustomerDTO } from '../../../../src/modules/xpto/infra/controller/dtos/CustomerDTO';
+import { CustomerRepository } from '../../../../src/modules/xpto/infra/repository/CustomerRepository';
 
 describe('customer query', () => {
   let customerQuery: CustomerQuery;
