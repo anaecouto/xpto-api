@@ -20,8 +20,11 @@ tag-image:
 push-image:
 	docker push $(REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)
 
-deploy-github-actions:
+deploy-runner-controller:
 	helm upgrade --install github-runner actions-runner-controller/actions-runner-controller --values .\charts\actions-controller\values.yaml --namespace github-actions --create-namespace
+
+deploy-runners:
+	kubectl apply -f .\charts\actions-controller\templates\runner.yaml
 
 deploy-argocd:
 	helm upgrade --install argocd argo-cd/argo-cd --values .\charts\argocd\values.yaml --namespace argocd --create-namespace
