@@ -2,5 +2,8 @@ dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 12.2.7
-digest: sha256:96620ad15a97427076bad1b6cd9272d7e615014adc6f0828e7c40072fe51405d
-generated: "2023-08-20T14:57:52.7545975-03:00"
+- name: argo-cd
+  repository: https://argoproj.github.io/argo-helm
+  version: 4.2.2
+digest: sha256:c2aa070179bd275a4df4a6b520b7a4e2578ed514230b35992c91eee6cfcd9aee
+generated: "2023-08-21T10:25:19.5446901-03:00"

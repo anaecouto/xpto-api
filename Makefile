@@ -21,4 +21,7 @@ push-image:
 	docker push $(REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)
 
 deploy-image:
-	helm upgrade --install --namespace $(NAMESPACE) $(RELEASE_NAME) .\charts\ --create-namespace
+	helm upgrade --install --namespace $(NAMESPACE) $(RELEASE_NAME) .\charts\app --create-namespace
+
+deploy-argocd:
+	helm upgrade --install --namespace argocd argocd .\charts\argocd --create-namespace
