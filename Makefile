@@ -23,5 +23,5 @@ push-image:
 deploy-image:
 	helm upgrade --install --namespace $(NAMESPACE) $(RELEASE_NAME) .\charts\app --create-namespace
 
-deploy-argocd:
-	helm upgrade --install --namespace argocd argocd .\charts\argocd --create-namespace
+# deploy-argocd:
+# 	helm upgrade --install --namespace argocd argocd .\charts\argocd --create-namespace

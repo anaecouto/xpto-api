@@ -4,10 +4,11 @@ metadata:
   name: app
   finalizers:
   - resources-finalizer.argocd.argoproj.io
+  namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: app
   project: default
   source:
     path: charts/app
