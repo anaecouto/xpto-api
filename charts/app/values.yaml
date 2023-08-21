@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: k3d-registry.localhost:5000/xpto-api
+  repository: ghcr.io/anaecouto/xpto-api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.0.2"
+  tag: "0.0.1"
 
 imagePullSecrets: []
 nameOverride: "xpto-api"
