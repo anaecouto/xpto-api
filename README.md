@@ -70,6 +70,15 @@ $ yarn start:debug
 localhost:3000/api/docs
 ```
 
+## Kubernetes com CD
+
+1) Criar um registry privado para colocar a imagem da aplicação
+2) Criar um cluster que utilize esse registry
+3) Buildar a image
+4) Colocar tag e fazer o push no private registry
+5) Fazer o deploy do argocd
+5) Fazer o deploy da aplicação
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
