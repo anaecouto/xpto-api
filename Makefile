@@ -26,7 +26,7 @@ push-image:
 deploy-runner-controller:
 	helm upgrade --install github-runner actions-runner-controller/actions-runner-controller \
 	--set authSecret.github_token=$(GITHUB_TOKEN) \
-	--values .\charts\actions-controller\values.yaml --namespace github-actions --create-namespace
+	--values ./charts/actions-controller/values.yaml --namespace github-actions --create-namespace
 
 deploy-runners:
 	kubectl apply -f ./charts/actions-controller/templates/runner.yaml
