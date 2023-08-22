@@ -1,5 +1,3 @@
-include .env
-
 IMAGE_NAME=xpto-api
 RELEASE_NAME=xpto-api
 NAMESPACE=app
