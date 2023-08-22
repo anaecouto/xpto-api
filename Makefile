@@ -29,7 +29,7 @@ deploy-runner-controller:
 	--values .\charts\actions-controller\values.yaml --namespace github-actions --create-namespace
 
 deploy-runners:
-	kubectl apply -f .\charts\actions-controller\templates\runner.yaml
+	kubectl apply -f ./charts/actions-controller/templates/runner.yaml
 
 create-ghcr-secret:
 	kubectl create secret docker-registry gcr-json-key \
@@ -39,7 +39,7 @@ create-ghcr-secret:
     --docker-email=$(GITHUB_EMAIL) --namespace=$(NAMESPACE)
 
 deploy-argocd:
-	helm upgrade --install argocd argo-cd/argo-cd --values .\charts\argocd\values.yaml --namespace argocd --create-namespace
+	helm upgrade --install argocd argo-cd/argo-cd --values ./charts/argocd/values.yaml --namespace argocd --create-namespace
 
 deploy-image:
-	helm upgrade --install --namespace $(NAMESPACE) $(RELEASE_NAME) .\charts\app --create-namespace
+	helm upgrade --install --namespace $(NAMESPACE) $(RELEASE_NAME) ./charts/app --create-namespace
