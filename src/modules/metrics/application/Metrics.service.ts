@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { register } from 'prom-client';
-import { CounterMetric } from '../counter/CounterMetric';
+import { CounterMetric } from '../domain/CounterMetric';
 
 @Injectable()
 export class MetricsService {
