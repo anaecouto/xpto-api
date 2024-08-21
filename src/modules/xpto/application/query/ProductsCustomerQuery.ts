@@ -4,7 +4,7 @@ import { ProductsCustomerDomain } from '../../domain/entity/ProductsCustomerDoma
 import { IProductsCustomerRepo } from '../../domain/repository/IProductsCustomerRepo';
 import { ProductsCustomerRepository } from '../../infra/repository/ProductsCustomerRepository';
 import { MetricsService } from 'src/modules/metrics/application/Metrics.service';
-import { FailedRequestsCounterMetric } from 'src/modules/metrics/impl/FailedRequestsCounterMetric';
+import { FailedRequestsCounterMetric } from 'src/modules/metrics/counter/impl/FailedRequestsCounterMetric';
 
 @Injectable()
 export default class ProductsCustomerQuery {
