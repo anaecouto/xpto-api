@@ -5,7 +5,7 @@ export class FailedRequestsCounterMetric implements CounterMetric {
   private readonly counter: Counter<string>;
   private readonly COUNTER_NAME: string = 'xpto_api_failed_requests_total';
 
-  constructor() {
+  constructor(private readonly labels: Record<string, string>) {
     if (!register.getSingleMetric(this.COUNTER_NAME)) {
       this.counter = new Counter({
         name: this.COUNTER_NAME,
@@ -18,11 +18,7 @@ export class FailedRequestsCounterMetric implements CounterMetric {
     }
   }
 
-  getLabels(): Record<string, string> {
-    return { method: 'GET', status_code: '404', method_name: 'someMethod' };
-  }
-
-  increment(labels: Record<string, string>): void {
-    this.counter.inc(labels);
+  increment(): void {
+    this.counter.inc(this.labels);
   }
 }

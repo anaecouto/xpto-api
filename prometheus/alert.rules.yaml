@@ -2,11 +2,11 @@ groups:
   - name: Failed Requests
     rules:
       - alert: xpto-api_HighFailedRequests
-        expr: sum(rate(xpto_api_failed_requests_total{status_code="404"}[5m])) by (method_name) > 0
+        expr: sum(rate(xpto_api_failed_requests_total[5m])) by (method_name, status_code) > 0
         for: 5s
         labels:
           severity: critical
           service: xpto-api
         annotations:
           summary: "High number of failed requests detected in service xpto-api"
-          description: "The number of failed requests (404) for method '{{ $labels.method_name }}' has exceeded the threshold."
+          description: "The number of failed requests ('{{ $labels.status_code }}') for method '{{ $labels.method_name }}' has exceeded the threshold."

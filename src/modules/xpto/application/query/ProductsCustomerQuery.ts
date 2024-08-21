@@ -19,7 +19,11 @@ export default class ProductsCustomerQuery {
     try {
       return await this.productsCustomerRepository.findById(id);
     } catch (e) {
-      const failedRequests = new FailedRequestsCounterMetric();
+      const failedRequests = new FailedRequestsCounterMetric({
+        method: 'GET',
+        status_code: '404',
+        method_name: '[ProductsCustomerQuery][findById]',
+      });
       this.metricsService.increment(failedRequests);
       throw new AppError('Essa compra não existe', { status: 404 });
     }

@@ -5,7 +5,7 @@ import { CounterMetric } from '../domain/CounterMetric';
 @Injectable()
 export class MetricsService {
   public increment(metric: CounterMetric): void {
-    metric.increment(metric.getLabels());
+    metric.increment(metric);
   }
 
   async getMetrics(): Promise<string> {
