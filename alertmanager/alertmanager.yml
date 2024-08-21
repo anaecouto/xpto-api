@@ -1,0 +1,13 @@
+route:
+  receiver: 'Mail Alert'
+
+receivers:
+  - name: 'Mail Alert'
+    email_configs:
+      - to: ''
+        from: ''
+        smarthost: ''
+        auth_username: ''
+        auth_password: ''
+        headers:
+          subject: 'Prometheus Mail Alert'

@@ -3,18 +3,24 @@ import AppError from 'src/shared/core/errors/AppError';
 import { ProductsCustomerDomain } from '../../domain/entity/ProductsCustomerDomain';
 import { IProductsCustomerRepo } from '../../domain/repository/IProductsCustomerRepo';
 import { ProductsCustomerRepository } from '../../infra/repository/ProductsCustomerRepository';
+import { MetricsService } from 'src/modules/metrics/application/Metrics.service';
+import { FailedRequestsCounterMetric } from 'src/modules/metrics/impl/FailedRequestsCounterMetric';
 
 @Injectable()
 export default class ProductsCustomerQuery {
   constructor(
     @Inject(ProductsCustomerRepository)
     private productsCustomerRepository: IProductsCustomerRepo,
+    @Inject(MetricsService)
+    private metricsService: MetricsService,
   ) {}
 
   async findById(id: string): Promise<ProductsCustomerDomain> {
     try {
       return await this.productsCustomerRepository.findById(id);
     } catch (e) {
+      const failedRequests = new FailedRequestsCounterMetric();
+      this.metricsService.increment(failedRequests);
       throw new AppError('Essa compra não existe', { status: 404 });
     }
   }

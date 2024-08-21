@@ -43,3 +43,6 @@ deploy-argocd:
 
 deploy-image:
 	helm upgrade --install --namespace $(NAMESPACE) $(RELEASE_NAME) ./charts/app --create-namespace
+
+deploy-prometheus:
+	helm upgrade --install prometheus prometheus-community/prometheus --values ./charts/prometheus/values.yaml --namespace monitoring --create-namespace

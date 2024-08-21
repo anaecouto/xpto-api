@@ -20,6 +20,7 @@ import { ProductsCustomerController } from './infra/controller/ProductsCustomers
 import { CustomerRepository } from './infra/repository/CustomerRepository';
 import { ProductRepository } from './infra/repository/ProductRepository';
 import { ProductsCustomerRepository } from './infra/repository/ProductsCustomerRepository';
+import { MetricsService } from '../metrics/application/Metrics.service';
 
 @Module({
   imports: [],
@@ -47,6 +48,7 @@ import { ProductsCustomerRepository } from './infra/repository/ProductsCustomerR
     ListCustomersWhoSpentMostByMonthUseCase,
     ListCustomersWhoSpentMostByYearUseCase,
     ProductsCustomerQuery,
+    MetricsService
   ],
 })
 export class XptoModule {}

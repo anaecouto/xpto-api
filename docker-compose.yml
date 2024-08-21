@@ -11,3 +11,26 @@ services:
       - '5432:5432'
     volumes: 
       - .docker/dbdata:/var/lib/postgresql/data
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yaml'
+    ports:
+      - 9090:9090
+    restart: unless-stopped
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prom_data:/prometheus
+  
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    volumes:
+      - ./alertmanager:/etc/alertmanager/
+    ports:
+      - "9093:9093"
+
+volumes:
+  prom_data:
