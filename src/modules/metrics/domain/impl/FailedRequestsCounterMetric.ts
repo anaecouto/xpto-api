@@ -1,6 +1,7 @@
 import { Counter, register } from 'prom-client';
+import { CounterMetric } from '../CounterMetric';
 
-export class FailedRequestsCounterMetric {
+export class FailedRequestsCounterMetric implements CounterMetric {
   private readonly counter: Counter<string>;
   private readonly COUNTER_NAME: string = 'xpto_api_failed_requests_total';
 
